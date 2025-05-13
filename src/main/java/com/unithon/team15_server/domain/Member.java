@@ -1,7 +1,10 @@
 package com.unithon.team15_server.domain;
 
+import com.unithon.team15_server.domain.dto.MemberSignupReq;
+import com.unithon.team15_server.domain.enums.MemberRole;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -19,4 +22,55 @@ public class Member {
     private String email;
 
     private String password;
+
+    private String language;
+
+    private String languageLevel;
+
+    private String visaType;
+
+    private String industry;
+
+    @Enumerated(EnumType.STRING)
+    private MemberRole memberRole;
+
+    @Builder
+    private Member(String nickname, String email, String password, String language, String languageLevel, String visaType, String industry, MemberRole memberRole) {
+        this.nickname = nickname;
+        this.email = email;
+        this.password = password;
+        this.language = language;
+        this.languageLevel = languageLevel;
+        this.visaType = visaType;
+        this.industry = industry;
+        this.memberRole = memberRole;
+    }
+
+    public static Member create(MemberSignupReq memberSignupReq, PasswordProcessor passwordProcessor) {
+        return Member.builder()
+                .nickname("")
+                .email(memberSignupReq.getEmail())
+                .password(passwordProcessor.encode(memberSignupReq.getPassword()))
+                .language("")
+                .languageLevel("")
+                .visaType("")
+                .industry("")
+                .memberRole(MemberRole.GUEST)
+                .build();
+    }
+
+    public void updateNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public void updateMemberRole(MemberRole memberRole) {
+        this.memberRole = memberRole;
+    }
+
+    public void updateProfile(String language, String languageLevel, String visaType, String industry) {
+        this.language = language;
+        this.languageLevel = languageLevel;
+        this.visaType = visaType;
+        this.industry = industry;
+    }
 }

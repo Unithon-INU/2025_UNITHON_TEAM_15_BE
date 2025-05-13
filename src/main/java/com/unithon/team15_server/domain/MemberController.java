@@ -1,19 +1,61 @@
 package com.unithon.team15_server.domain;
 
+import com.unithon.team15_server.domain.dto.MemberNicknameReq;
+import com.unithon.team15_server.domain.dto.MemberProfileReq;
+import com.unithon.team15_server.domain.dto.MemberSignInReq;
+import com.unithon.team15_server.domain.dto.MemberSignupReq;
+import com.unithon.team15_server.global.jwt.MemberDetail;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/member")
+@RequiredArgsConstructor
+@Tag(name = "Member", description = "회원 API")
 public class MemberController {
-    @PostMapping("/sign-up")
-    public void signup() {
+    private final MemberService memberService;
 
+    @Operation(summary = "회원가입", description = "- 이메일 중복 여부를 체크합니다.\n")
+    @PostMapping("/sign-up")
+    public ResponseEntity<Map<String, String>> signup(@RequestBody MemberSignupReq memberSignupReq) {
+        String token = memberService.signup(memberSignupReq);
+        Map<String, String> result = new HashMap<>();
+        result.put("token", token);
+        return ResponseEntity.ok(result);
+    }
+
+    @Operation(summary = "닉네임 설정", description =
+            "- 회원가입 이후 닉네임을 설정합니다.\n" +
+                    "- 닉네임 중복을 체크합니다.\n")
+    @PostMapping("/me/nickname")
+    public ResponseEntity<Void> registerNickname(@AuthenticationPrincipal MemberDetail memberDetail, @RequestBody MemberNicknameReq memberNicknameReq) {
+        memberService.registerNickname(memberDetail.getId(), memberNicknameReq);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @Operation(summary = "회원 정보 설정", description = "회원의 정보를 받습니다. (언어 ~ 업무 직종)")
+    @PostMapping("/me/profile")
+    public ResponseEntity<Void> registerProfile(@AuthenticationPrincipal MemberDetail memberDetail, @RequestBody MemberProfileReq memberProfileReq) {
+        memberService.registerProfile(memberDetail.getId(), memberProfileReq);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PostMapping("/sign-in")
-    public void signin() {
-
+    public ResponseEntity<Map<String, String>> signin(@RequestBody MemberSignInReq memberSignInReq) {
+        String token = memberService.signin(memberSignInReq);
+        Map<String, String> result = new HashMap<>();
+        result.put("token", token);
+        return ResponseEntity.ok(result);
     }
 }
