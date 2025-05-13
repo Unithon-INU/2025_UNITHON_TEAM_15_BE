@@ -38,7 +38,7 @@ public class SecurityConfig {
                         .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
 
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/member/sign-up").permitAll()
+                        .requestMatchers("/api/member/sign-up", "/api/member/sign-in").permitAll()
                         .anyRequest().authenticated())
 
                 .sessionManagement(session -> session
