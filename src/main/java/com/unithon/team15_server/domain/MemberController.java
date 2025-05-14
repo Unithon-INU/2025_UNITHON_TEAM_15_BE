@@ -6,8 +6,6 @@ import com.unithon.team15_server.domain.dto.MemberSignInReq;
 import com.unithon.team15_server.domain.dto.MemberSignupReq;
 import com.unithon.team15_server.global.jwt.MemberDetail;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
