@@ -50,12 +50,13 @@ public class MemberService {
     }
 
     @Transactional
-    public void registerProfile(Long memberId, MemberProfileReq memberProfileReq) {
+    public String registerProfile(Long memberId, MemberProfileReq memberProfileReq) {
         Member member = memberRepository.findById(memberId).orElseThrow(
                 () -> new CustomException(ErrorCode.USER_NOT_FOUND)
         );
         member.updateProfile(memberProfileReq.getLanguage(), memberProfileReq.getLanguageLevel(), memberProfileReq.getVisaType(), memberProfileReq.getIndustry());
-        member.updateMemberRole(MemberRole.USER); //MemberRole == USER
+        member.updateMemberRole(MemberRole.USER);
+        return getToken(member.getEmail());
     }
 
 

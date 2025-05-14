@@ -48,14 +48,17 @@ public class MemberController {
     }
 
     @Operation(summary = "회원 정보 설정", description = "회원의 정보를 받습니다. (언어 ~ 업무 직종)")
-    @ApiResponse(responseCode = "204", description = "회원 정보 설정 성공")
+    @ApiResponse(responseCode = "200", description = "회원 정보 설정 성공 (respones == 토큰)")
     @PostMapping("/me/profile")
-    public ResponseEntity<Void> registerProfile(@AuthenticationPrincipal MemberDetail memberDetail, @RequestBody MemberProfileReq memberProfileReq) {
-        memberService.registerProfile(memberDetail.getId(), memberProfileReq);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<Map<String, String>> registerProfile(@AuthenticationPrincipal MemberDetail memberDetail, @RequestBody MemberProfileReq memberProfileReq) {
+        String token = memberService.registerProfile(memberDetail.getId(), memberProfileReq);
+        Map<String, String> result = new HashMap<>();
+        result.put("token", token);
+        return ResponseEntity.ok(result);
     }
 
     @PostMapping("/sign-in")
+    @Operation(summary = "로그인")
     @ApiResponse(responseCode = "200", description = "로그인 성공 (respones == 토큰)")
     public ResponseEntity<Map<String, String>> signin(@RequestBody MemberSignInReq memberSignInReq) {
         String token = memberService.signin(memberSignInReq);
