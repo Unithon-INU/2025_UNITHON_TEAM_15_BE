@@ -6,6 +6,9 @@ import com.unithon.team15_server.domain.dto.MemberSignInReq;
 import com.unithon.team15_server.domain.dto.MemberSignupReq;
 import com.unithon.team15_server.global.jwt.MemberDetail;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,6 +30,7 @@ public class MemberController {
     private final MemberService memberService;
 
     @Operation(summary = "회원가입", description = "- 이메일 중복 여부를 체크합니다.\n")
+    @ApiResponse(responseCode = "204", description = "회원 초기 가입 성공 (respones == 토큰)")
     @PostMapping("/sign-up")
     public ResponseEntity<Map<String, String>> signup(@RequestBody MemberSignupReq memberSignupReq) {
         String token = memberService.signup(memberSignupReq);
@@ -38,6 +42,7 @@ public class MemberController {
     @Operation(summary = "닉네임 설정", description =
             "- 회원가입 이후 닉네임을 설정합니다.\n" +
                     "- 닉네임 중복을 체크합니다.\n")
+    @ApiResponse(responseCode = "204", description = "닉네임 설정 성공")
     @PostMapping("/me/nickname")
     public ResponseEntity<Void> registerNickname(@AuthenticationPrincipal MemberDetail memberDetail, @RequestBody MemberNicknameReq memberNicknameReq) {
         memberService.registerNickname(memberDetail.getId(), memberNicknameReq);
@@ -45,6 +50,7 @@ public class MemberController {
     }
 
     @Operation(summary = "회원 정보 설정", description = "회원의 정보를 받습니다. (언어 ~ 업무 직종)")
+    @ApiResponse(responseCode = "204", description = "회원 정보 설정 성공")
     @PostMapping("/me/profile")
     public ResponseEntity<Void> registerProfile(@AuthenticationPrincipal MemberDetail memberDetail, @RequestBody MemberProfileReq memberProfileReq) {
         memberService.registerProfile(memberDetail.getId(), memberProfileReq);
@@ -52,6 +58,7 @@ public class MemberController {
     }
 
     @PostMapping("/sign-in")
+    @ApiResponse(responseCode = "200", description = "로그인 성공 (respones == 토큰)")
     public ResponseEntity<Map<String, String>> signin(@RequestBody MemberSignInReq memberSignInReq) {
         String token = memberService.signin(memberSignInReq);
         Map<String, String> result = new HashMap<>();
