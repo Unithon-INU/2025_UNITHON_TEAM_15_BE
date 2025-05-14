@@ -47,7 +47,6 @@ public class MemberService {
                 () -> new CustomException(ErrorCode.USER_NOT_FOUND)
         );
         member.updateNickname(memberNicknameReq.getNickname());
-        member.updateMemberRole(MemberRole.USER); //MemberRole == USER
     }
 
     @Transactional
@@ -56,7 +55,9 @@ public class MemberService {
                 () -> new CustomException(ErrorCode.USER_NOT_FOUND)
         );
         member.updateProfile(memberProfileReq.getLanguage(), memberProfileReq.getLanguageLevel(), memberProfileReq.getVisaType(), memberProfileReq.getIndustry());
+        member.updateMemberRole(MemberRole.USER); //MemberRole == USER
     }
+
 
     public String signin(MemberSignInReq memberSignInReq){
         Member member = memberRepository.findByEmail(memberSignInReq.getEmail()).orElseThrow(
