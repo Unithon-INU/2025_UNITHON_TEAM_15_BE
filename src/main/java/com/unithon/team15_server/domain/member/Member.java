@@ -1,7 +1,7 @@
-package com.unithon.team15_server.domain;
+package com.unithon.team15_server.domain.member;
 
-import com.unithon.team15_server.domain.dto.MemberSignupReq;
-import com.unithon.team15_server.domain.enums.MemberRole;
+import com.unithon.team15_server.domain.member.dto.MemberSignupReq;
+import com.unithon.team15_server.domain.member.enums.MemberRole;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;

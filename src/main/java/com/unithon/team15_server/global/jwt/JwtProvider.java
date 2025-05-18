@@ -1,6 +1,6 @@
 package com.unithon.team15_server.global.jwt;
 
-import com.unithon.team15_server.domain.Member;
+import com.unithon.team15_server.domain.member.Member;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;

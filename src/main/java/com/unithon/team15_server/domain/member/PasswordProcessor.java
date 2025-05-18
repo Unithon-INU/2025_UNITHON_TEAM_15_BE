@@ -1,4 +1,4 @@
-package com.unithon.team15_server.domain;
+package com.unithon.team15_server.domain.member;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;

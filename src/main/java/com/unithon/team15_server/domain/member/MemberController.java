@@ -1,9 +1,9 @@
-package com.unithon.team15_server.domain;
+package com.unithon.team15_server.domain.member;
 
-import com.unithon.team15_server.domain.dto.MemberNicknameReq;
-import com.unithon.team15_server.domain.dto.MemberProfileReq;
-import com.unithon.team15_server.domain.dto.MemberSignInReq;
-import com.unithon.team15_server.domain.dto.MemberSignupReq;
+import com.unithon.team15_server.domain.member.dto.MemberNicknameReq;
+import com.unithon.team15_server.domain.member.dto.MemberProfileReq;
+import com.unithon.team15_server.domain.member.dto.MemberSignInReq;
+import com.unithon.team15_server.domain.member.dto.MemberSignupReq;
 import com.unithon.team15_server.global.jwt.MemberDetail;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

@@ -1,7 +1,7 @@
 package com.unithon.team15_server.global.jwt;
 
-import com.unithon.team15_server.domain.Member;
-import com.unithon.team15_server.domain.MemberRepository;
+import com.unithon.team15_server.domain.member.Member;
+import com.unithon.team15_server.domain.member.MemberRepository;
 import com.unithon.team15_server.global.exception.CustomException;
 import com.unithon.team15_server.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;

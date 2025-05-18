@@ -1,6 +1,6 @@
 package com.unithon.team15_server.global.jwt;
 
-import com.unithon.team15_server.domain.Member;
+import com.unithon.team15_server.domain.member.Member;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;

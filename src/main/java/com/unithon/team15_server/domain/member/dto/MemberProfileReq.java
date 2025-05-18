@@ -1,4 +1,4 @@
-package com.unithon.team15_server.domain.dto;
+package com.unithon.team15_server.domain.member.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
