@@ -1,9 +1,6 @@
 package com.unithon.team15_server.domain.member;
 
-import com.unithon.team15_server.domain.member.dto.MemberNicknameReq;
-import com.unithon.team15_server.domain.member.dto.MemberProfileReq;
-import com.unithon.team15_server.domain.member.dto.MemberSignInReq;
-import com.unithon.team15_server.domain.member.dto.MemberSignupReq;
+import com.unithon.team15_server.domain.member.dto.*;
 import com.unithon.team15_server.domain.member.enums.MemberRole;
 import com.unithon.team15_server.global.exception.CustomException;
 import com.unithon.team15_server.global.exception.ErrorCode;
@@ -50,28 +47,32 @@ public class MemberService {
     }
 
     @Transactional
-    public String registerProfile(Long memberId, MemberProfileReq memberProfileReq) {
+    public String registerProfile(Long memberId, MemberProfileSetReq memberProfileSetReq) {
         Member member = memberRepository.findById(memberId).orElseThrow(
                 () -> new CustomException(ErrorCode.USER_NOT_FOUND)
         );
-        member.updateProfile(memberProfileReq.getLanguage(), memberProfileReq.getLanguageLevel(), memberProfileReq.getVisaType(), memberProfileReq.getIndustry());
+        member.updateProfile(memberProfileSetReq.getLanguage(), memberProfileSetReq.getTopikLevel(), memberProfileSetReq.getVisaType(), memberProfileSetReq.getIndustry());
         member.updateMemberRole(MemberRole.USER);
         return getToken(member.getEmail());
     }
 
 
-    public String signin(MemberSignInReq memberSignInReq){
+    public String signin(MemberSignInReq memberSignInReq) {
         Member member = memberRepository.findByEmail(memberSignInReq.getEmail()).orElseThrow(
                 () -> new CustomException(ErrorCode.USER_NOT_FOUND)
         );
-        if (!passwordProcessor.matches(memberSignInReq.getPassword(), member.getPassword())){
-           throw new CustomException(ErrorCode.INVALID_PASSWORD);
+        if (!passwordProcessor.matches(memberSignInReq.getPassword(), member.getPassword())) {
+            throw new CustomException(ErrorCode.INVALID_PASSWORD);
         }
 
         return getToken(member.getEmail());
     }
 
-    private String getToken(String email){
+    public MemberProfileGetRes getMemberProfile(Long memberId) {
+        return memberRepository.findMemberProfileById(memberId);
+    }
+
+    private String getToken(String email) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email, null);
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
         return jwtProvider.generateToken(authentication);

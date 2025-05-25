@@ -1,9 +1,6 @@
 package com.unithon.team15_server.domain.member;
 
-import com.unithon.team15_server.domain.member.dto.MemberNicknameReq;
-import com.unithon.team15_server.domain.member.dto.MemberProfileReq;
-import com.unithon.team15_server.domain.member.dto.MemberSignInReq;
-import com.unithon.team15_server.domain.member.dto.MemberSignupReq;
+import com.unithon.team15_server.domain.member.dto.*;
 import com.unithon.team15_server.global.jwt.MemberDetail;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -12,10 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -47,11 +41,12 @@ public class MemberController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @Operation(summary = "회원 정보 설정", description = "회원의 정보를 받습니다. (언어 ~ 업무 직종)")
+    @Operation(summary = "회원 정보 설정", description = "- 회원의 정보를 받습니다. (언어 ~ 업무 직종)\n" +
+            "- topikLevel값은 디자인 그대로 넣어주세요. (없음, TOPIK 3급, TOPIK 4급 이상) \n")
     @ApiResponse(responseCode = "200", description = "회원 정보 설정 성공 (respones == 토큰)")
     @PostMapping("/me/profile")
-    public ResponseEntity<Map<String, String>> registerProfile(@AuthenticationPrincipal MemberDetail memberDetail, @RequestBody MemberProfileReq memberProfileReq) {
-        String token = memberService.registerProfile(memberDetail.getId(), memberProfileReq);
+    public ResponseEntity<Map<String, String>> registerProfile(@AuthenticationPrincipal MemberDetail memberDetail, @RequestBody MemberProfileSetReq memberProfileSetReq) {
+        String token = memberService.registerProfile(memberDetail.getId(), memberProfileSetReq);
         Map<String, String> result = new HashMap<>();
         result.put("token", token);
         return ResponseEntity.ok(result);
@@ -65,5 +60,13 @@ public class MemberController {
         Map<String, String> result = new HashMap<>();
         result.put("token", token);
         return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/me/profile")
+    @Operation(summary = "회원의 정보 조회", description = "- 회원의 온보딩 정보 조회\n" +
+            "- 설정이 되지 않은 값은 빈 문자열(\"\") 로 응답")
+    @ApiResponse(responseCode = "200", description = "로그인 성공 (respones == 토큰)")
+    public ResponseEntity<MemberProfileGetRes> getMemberProfile(@AuthenticationPrincipal MemberDetail memberDetail) {
+        return ResponseEntity.ok(memberService.getMemberProfile(memberDetail.getId()));
     }
 }
