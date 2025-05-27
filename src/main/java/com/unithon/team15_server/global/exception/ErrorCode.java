@@ -15,6 +15,8 @@ public enum ErrorCode {
     INVALID_TOKEN_FORMAT(HttpStatus.UNAUTHORIZED, "401-2", "토큰의 형식이 유효하지 않습니다."),
     EXPIRED_TOKEN(HttpStatus.UNAUTHORIZED, "401-3", "토큰 기간이 만료됐습니다."),
     INVALID_PASSWORD(HttpStatus.UNAUTHORIZED, "401-5", "비밀번호가 일치하지 않습니다."),
+    INVALID_CODE(HttpStatus.UNAUTHORIZED, "401-6", "인증코드가 유효하지 않습니다."),
+    EXPIRED_CODE(HttpStatus.UNAUTHORIZED, "401-7", "인증코드가 만료되었습니다."),
 
     //403 Forbidden
 
