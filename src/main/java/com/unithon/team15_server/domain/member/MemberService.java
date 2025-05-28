@@ -25,9 +25,6 @@ public class MemberService {
 
     @Transactional
     public String signup(MemberSignupReq memberSignupReq) {
-        if (memberRepository.existsByEmail(memberSignupReq.getEmail())) {
-            throw new CustomException(ErrorCode.USER_ALREADY_REGISTERED);
-        }
         Member member = Member.create(memberSignupReq, passwordProcessor); //MemberRole == GUEST
         memberRepository.save(member);
 

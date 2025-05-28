@@ -1,5 +1,6 @@
 package com.unithon.team15_server.global.verification;
 
+import com.unithon.team15_server.domain.member.MemberRepository;
 import com.unithon.team15_server.global.exception.CustomException;
 import com.unithon.team15_server.global.exception.ErrorCode;
 import com.unithon.team15_server.global.verification.dto.EmailSendReq;
@@ -23,11 +24,15 @@ import java.util.Random;
 @RequiredArgsConstructor
 public class EmailService {
     private final EmailRepository emailRepository;
+    private final MemberRepository memberRepository;
     private final JavaMailSender javaMailSender;
     @Value("${spring.mail.username}")
     private String senderEmail;
 
     public void sendEmail(EmailSendReq emailSendReq) throws MessagingException {
+        if (memberRepository.existsByEmail(emailSendReq.getEmail())) {
+            throw new CustomException(ErrorCode.USER_ALREADY_REGISTERED);
+        }
         MimeMessage emailForm = createEmailForm(emailSendReq.getEmail());
         javaMailSender.send(emailForm);
     }
