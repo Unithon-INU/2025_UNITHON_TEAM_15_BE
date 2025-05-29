@@ -41,7 +41,7 @@ public class EmailService {
         Email email = emailRepository.findEmailByEmail(emailVerifyCodeReq.getEmail()).orElseThrow(
                 () -> new CustomException(ErrorCode.USER_NOT_FOUND)
         );
-        if(!email.getExpiredAt().isBefore(LocalDateTime.now())) { //유효기간 만료
+        if(email.getExpiredAt().isBefore(LocalDateTime.now())) { //유효기간 만료
             emailRepository.delete(email);
             throw new CustomException(ErrorCode.EXPIRED_CODE);
         }
