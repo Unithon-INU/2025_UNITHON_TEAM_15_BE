@@ -1,5 +1,6 @@
 package com.unithon.team15_server.domain.member;
 
+import com.unithon.team15_server.domain.employmentcheck.CheckStep;
 import com.unithon.team15_server.domain.member.dto.MemberSignupReq;
 import com.unithon.team15_server.domain.member.enums.MemberRole;
 import jakarta.persistence.*;
@@ -34,8 +35,11 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private MemberRole memberRole;
 
+    @Enumerated(EnumType.STRING)
+    private CheckStep checkStep;
+
     @Builder
-    private Member(String nickname, String email, String password, String language, String topikLevel, String visaType, String industry, MemberRole memberRole) {
+    private Member(String nickname, String email, String password, String language, String topikLevel, String visaType, String industry, MemberRole memberRole, CheckStep checkStep) {
         this.nickname = nickname;
         this.email = email;
         this.password = password;
@@ -44,6 +48,7 @@ public class Member {
         this.visaType = visaType;
         this.industry = industry;
         this.memberRole = memberRole;
+        this.checkStep = checkStep;
     }
 
     public static Member create(MemberSignupReq memberSignupReq, PasswordProcessor passwordProcessor) {
@@ -56,6 +61,7 @@ public class Member {
                 .visaType("")
                 .industry("")
                 .memberRole(MemberRole.GUEST)
+                .checkStep(CheckStep.STEP1)
                 .build();
     }
 
