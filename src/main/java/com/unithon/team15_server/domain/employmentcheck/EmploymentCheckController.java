@@ -23,11 +23,6 @@ public class EmploymentCheckController {
         return ResponseEntity.ok(employmentCheckService.getHomeInfo(memberDetail.getId()));
     }
 
-    @GetMapping("/steps")
-    public void getSteps(@AuthenticationPrincipal MemberDetail memberDetail) {
-
-    }
-
     @GetMapping("/tips")
     public ResponseEntity<List<TipInfoRes>> getTips(CheckStep checkStep) {
         return ResponseEntity.ok(employmentCheckService.getTipInfo(checkStep));
