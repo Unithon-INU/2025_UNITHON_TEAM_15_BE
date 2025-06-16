@@ -1,5 +1,6 @@
 package com.unithon.team15_server.domain.member;
 
+import com.unithon.team15_server.domain.employmentcheck.EmploymentCheckService;
 import com.unithon.team15_server.domain.member.dto.*;
 import com.unithon.team15_server.domain.member.enums.MemberRole;
 import com.unithon.team15_server.global.exception.CustomException;
@@ -22,6 +23,7 @@ public class MemberService {
     private final JwtProvider jwtProvider;
     private final AuthenticationManager authenticationManager;
     private final PasswordProcessor passwordProcessor;
+    private final EmploymentCheckService employmentCheckService;
 
     @Transactional
     public String signup(MemberSignupReq memberSignupReq) {
@@ -43,6 +45,7 @@ public class MemberService {
         member.updateNickname(memberNicknameReq.getNickname());
     }
 
+    //진짜 회원
     @Transactional
     public String registerProfile(Long memberId, MemberProfileSetReq memberProfileSetReq) {
         Member member = memberRepository.findById(memberId).orElseThrow(
@@ -50,6 +53,7 @@ public class MemberService {
         );
         member.updateProfile(memberProfileSetReq.getLanguage(), memberProfileSetReq.getTopikLevel(), memberProfileSetReq.getVisaType(), memberProfileSetReq.getIndustry());
         member.updateMemberRole(MemberRole.USER);
+        employmentCheckService.createEmploymentCheck(memberId); //회원가입 성공시 해당 회원에 대한 checklist 전체 생성
         return getToken(member.getEmail());
     }
 
