@@ -7,19 +7,19 @@ import lombok.Getter;
 @Getter
 public class MemberProfileSetReq {
 
-    @NotBlank
     @Schema(description = "설정한 언어", example = "English")
+    @NotBlank
     private String language;
 
-    @NotBlank
     @Schema(description = "비자 종류", example = "D-2")
+    @NotBlank
     private String visaType;
 
-    @NotBlank
     @Schema(description = "한국어 능력", example = "TOPIK 3급")
+    @NotBlank
     private String topikLevel;
 
-    @NotBlank
     @Schema(description = "업종", example = "음식점/카페,편의점/마트")
+    @NotBlank
     private String industry;
 }

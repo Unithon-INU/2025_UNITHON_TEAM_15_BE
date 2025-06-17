@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 public enum ErrorCode {
     //400 Bad Request
     INVALID_INPUT(HttpStatus.BAD_REQUEST, "400-1", "입력값이 올바르지 않습니다."),
+    MISSING_REQUIRED_FIELD(HttpStatus.BAD_REQUEST, "400-2", "요청 값이 누락되었습니다."),
 
     //401 Unauthorized
     ERROR_UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "401-1", "인증 정보가 없습니다."),
