@@ -9,19 +9,24 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.NoSuchMessageException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class EmploymentCheckService {
     private final EmploymentCheckRepository employmentCheckRepository;
     private final MemberRepository memberRepository;
     private final MessageSource messageSource;
     private final static int TOTAL = 10;
 
+    @Transactional
     public void createEmploymentCheck(Long memberId) {
         List<EmploymentCheck> employmentChecks = new ArrayList<>();
         for (CheckStep checkStep : CheckStep.values()) {
@@ -39,7 +44,7 @@ public class EmploymentCheckService {
         );
         //진행률 계산
         CheckStep memberCheckStep = member.getCheckStep();
-        int count = employmentCheckRepository.countByCheckStepAndIsCheckedTrue(memberCheckStep);
+        int count = employmentCheckRepository.countByMemberIdAndIsCheckedTrue(memberId);
         int progress = Math.round((float) count / TOTAL * 100);
 
         List<EmploymentCheckRes> employmentCheckRes = new ArrayList<>();
@@ -52,6 +57,7 @@ public class EmploymentCheckService {
             List<DocumentInfoRes> documentInfoRes = new ArrayList<>();
             for (int i = 0; i < employmentChecks.size(); i++) {
                 documentInfoRes.add(DocumentInfoRes.builder()
+                        .submissionIdx(i)
                         .title(messageSource.getMessage("main.step." + checkStep.getInx() + ".submissionDocument." + i, null, Locale.KOREAN))
                         .isChecked(employmentChecks.get(i).isChecked())
                         .build());
@@ -70,9 +76,11 @@ public class EmploymentCheckService {
     private StepInfoRes getStepInfo(CheckStep checkStep) {
         int checkStepInx = checkStep.getInx();
         String prefix = "main.step." + checkStepInx;
+        System.out.println("prefix: " + prefix);
         List<String> precautions = new ArrayList<>();
         for (int i = 0; i < checkStep.getPrecautionTotal(); i++) {
             precautions.add(messageSource.getMessage(prefix + ".precautions." + i, null, Locale.KOREAN));
+            System.out.println(messageSource.getMessage(prefix + ".precautions." + i, null, Locale.KOREAN));
         }
 
         return StepInfoRes.builder()
@@ -138,5 +146,31 @@ public class EmploymentCheckService {
             }
         }
         return tipInfoRes;
+    }
+
+    @Transactional
+    public void updateEmploymentCheck(Long memberId, UpdateEmplCheckReq updateEmplCheckReq) {
+        Member member = memberRepository.findById(memberId).orElseThrow(
+                () -> new CustomException(ErrorCode.USER_NOT_FOUND)
+        );
+        member.updateCheckStep(updateEmplCheckReq.getMemberCheckStep());
+
+        List<EmploymentCheck> employmentChecks = employmentCheckRepository.findAllByMemberId(memberId);
+
+        Map<String, Boolean> map = updateEmplCheckReq.getUpdateEmplCheckDetailReqs().stream()
+                .collect(Collectors.toMap(
+                        check -> check.getCheckStep().name() + "-" + check.getSubmissionIdx(),
+                        UpdateEmplCheckDetailReq::isChecked)
+                );
+
+        for (EmploymentCheck employmentCheck : employmentChecks) {
+            String key = employmentCheck.getCheckStep() + "-" + employmentCheck.getSubmissionIdx();
+            if (map.containsKey(key)) {
+                employmentCheck.updateIsChecked(map.get(key));
+            } else {
+                throw new CustomException(ErrorCode.MISSING_REQUIRED_FIELD);
+            }
+        }
+
     }
 }

@@ -79,4 +79,8 @@ public class Member {
         this.visaType = visaType;
         this.industry = industry;
     }
+
+    public void updateCheckStep(CheckStep checkStep) {
+        this.checkStep = checkStep;
+    }
 }

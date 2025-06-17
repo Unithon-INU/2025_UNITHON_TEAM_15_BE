@@ -41,4 +41,8 @@ public class EmploymentCheck {
                 .isChecked(false)
                 .build();
     }
+
+    public void updateIsChecked(boolean isChecked){
+        this.isChecked = isChecked;
+    }
 }
