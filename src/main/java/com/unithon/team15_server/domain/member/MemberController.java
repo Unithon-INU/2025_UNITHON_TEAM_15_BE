@@ -52,9 +52,9 @@ public class MemberController {
         return ResponseEntity.ok(result);
     }
 
-    @PostMapping("/sign-in")
     @Operation(summary = "로그인")
     @ApiResponse(responseCode = "200", description = "로그인 성공 (respones == 토큰)")
+    @PostMapping("/sign-in")
     public ResponseEntity<Map<String, String>> signin(@RequestBody MemberSignInReq memberSignInReq) {
         String token = memberService.signin(memberSignInReq);
         Map<String, String> result = new HashMap<>();
@@ -62,10 +62,10 @@ public class MemberController {
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/me/profile")
     @Operation(summary = "회원의 정보 조회", description = "- 회원의 온보딩 정보 조회\n" +
             "- 설정이 되지 않은 값은 빈 문자열(\"\") 로 응답")
     @ApiResponse(responseCode = "200", description = "로그인 성공 (respones == 토큰)")
+    @GetMapping("/me/profile")
     public ResponseEntity<MemberProfileGetRes> getMemberProfile(@AuthenticationPrincipal MemberDetail memberDetail) {
         return ResponseEntity.ok(memberService.getMemberProfile(memberDetail.getId()));
     }
