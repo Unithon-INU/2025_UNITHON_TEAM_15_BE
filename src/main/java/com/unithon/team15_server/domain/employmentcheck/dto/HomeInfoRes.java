@@ -14,8 +14,8 @@ public class HomeInfoRes {
     @Schema(description = "회원의 닉네임", example = "봉식이")
     private String nickname;
 
-    @Schema(description = "진행 현황", example = "20%")
-    private float progress;
+    @Schema(description = "진행 현황")
+    private int progress;
 
     @Schema(description = "회원이 진행하고 있던 step", example = "STEP1")
     private CheckStep memberCheckStep;
