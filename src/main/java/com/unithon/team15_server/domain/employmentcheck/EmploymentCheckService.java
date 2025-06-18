@@ -141,7 +141,7 @@ public class EmploymentCheckService {
         );
         member.updateCheckStep(updateEmplCheckReq.getCheckStep()); // 현재 업데이트 하는 곳 == 현재 회원이 진행하는 곳
 
-        EmploymentCheck employmentCheck = employmentCheckRepository.findByCheckStepAndSubmissionIdx(updateEmplCheckReq.getCheckStep(), updateEmplCheckReq.getSubmissionIdx()).orElseThrow(
+        EmploymentCheck employmentCheck = employmentCheckRepository.findByMemberIdAndCheckStepAndSubmissionIdx(memberId, updateEmplCheckReq.getCheckStep(), updateEmplCheckReq.getSubmissionIdx()).orElseThrow(
                 () -> new CustomException(ErrorCode.EMPLOY_CHECK_NOT_FOUND)
         );
         employmentCheck.toggleIsChecked();
