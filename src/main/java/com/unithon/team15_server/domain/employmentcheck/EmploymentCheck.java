@@ -23,10 +23,10 @@ public class EmploymentCheck {
     //제출서류 인덱스
     private int submissionIdx;
 
-    private boolean isChecked;
+    private Boolean isChecked;
 
     @Builder
-    private EmploymentCheck(Long memberId, CheckStep checkStep, int submissionIdx, boolean isChecked) {
+    private EmploymentCheck(Long memberId, CheckStep checkStep, int submissionIdx, Boolean isChecked) {
         this.memberId = memberId;
         this.checkStep = checkStep;
         this.submissionIdx = submissionIdx;
@@ -42,7 +42,7 @@ public class EmploymentCheck {
                 .build();
     }
 
-    public void updateIsChecked(boolean isChecked){
-        this.isChecked = isChecked;
+    public void toggleIsChecked() {
+        this.isChecked = !this.isChecked;
     }
 }

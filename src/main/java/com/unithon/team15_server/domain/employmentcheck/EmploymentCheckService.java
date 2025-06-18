@@ -14,8 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -24,7 +22,7 @@ public class EmploymentCheckService {
     private final EmploymentCheckRepository employmentCheckRepository;
     private final MemberRepository memberRepository;
     private final MessageSource messageSource;
-    private final static int TOTAL = 10;
+    private final static int TOTAL = 10; //TODO 총 제출 서류 바뀌면 수정하기
 
     @Transactional
     public void createEmploymentCheck(Long memberId) {
@@ -44,8 +42,6 @@ public class EmploymentCheckService {
         );
         //진행률 계산
         CheckStep memberCheckStep = member.getCheckStep();
-        int count = employmentCheckRepository.countByMemberIdAndIsCheckedTrue(memberId);
-        int progress = Math.round((float) count / TOTAL * 100);
 
         List<EmploymentCheckRes> employmentCheckRes = new ArrayList<>();
         for (CheckStep checkStep : CheckStep.values()) { //모든 step에 대한 값 가져오기
@@ -59,7 +55,7 @@ public class EmploymentCheckService {
                 documentInfoRes.add(DocumentInfoRes.builder()
                         .submissionIdx(i)
                         .title(messageSource.getMessage("main.step." + checkStep.getInx() + ".submissionDocument." + i, null, Locale.KOREAN))
-                        .isChecked(employmentChecks.get(i).isChecked())
+                        .isChecked(employmentChecks.get(i).getIsChecked())
                         .build());
             }
             employmentCheckRes.add(new EmploymentCheckRes(checkStep, stepInfoRes, documentInfoRes));
@@ -67,7 +63,7 @@ public class EmploymentCheckService {
 
         return HomeInfoRes.builder()
                 .nickname(member.getNickname())
-                .progress(progress)
+                .progress(calculateProgress(memberId)) // progress 계산해서 넣기
                 .memberCheckStep(memberCheckStep)
                 .employmentCheckRes(employmentCheckRes)
                 .build();
@@ -99,47 +95,36 @@ public class EmploymentCheckService {
             try {
                 String prefix = "main.step." + checkStepInx + ".tip." + i;
                 String title = messageSource.getMessage(prefix + ".title", null, Locale.KOREAN);
-
-                List<String> itemTitleList = new ArrayList<>();
-                List<String> itemContentList = new ArrayList<>();
+                List<TipInfoDetailRes> tipInfoDetailRes = new ArrayList<>();
 
                 int j = 0;
                 while (true) {
                     try {
+
                         String itemContent = messageSource.getMessage(prefix + ".item.content." + j, null, Locale.KOREAN);
-                        itemContentList.add(itemContent);
+                        System.out.println("itemContent:" + itemContent);
 
                         String itemTitle = null;
                         try {
                             itemTitle = messageSource.getMessage(prefix + ".item.title." + j, null, Locale.KOREAN);
                         } catch (NoSuchMessageException e) {
-                            itemTitle = "";
-                            break; // item의 title이 없음
+                            itemTitle = ""; // item의 title이 없음
                         }
-                        itemTitleList.add(itemTitle);
+
+                        String warning = null;
+                        try {
+                            warning = messageSource.getMessage(prefix + ".warning." + j, null, Locale.KOREAN);
+                        } catch (NoSuchMessageException e) {
+                            warning = "";
+                        }
+                        tipInfoDetailRes.add(new TipInfoDetailRes(itemTitle, itemContent, warning));
                         j++;
 
                     } catch (NoSuchMessageException e) {
                         break; // item에 대한 값 모두 없음
                     }
                 }
-
-                String warning = null;
-                try {
-                    warning = messageSource.getMessage(prefix + ".warning", null, Locale.KOREAN);
-                } catch (NoSuchMessageException e) {
-                    warning = "";
-                }
-
-                tipInfoRes.add(
-                        TipInfoRes.builder()
-                                .title(title)
-                                .itemTitle(itemTitleList)
-                                .itemContent(itemContentList)
-                                .warning(warning)
-                                .build()
-                );
-
+                tipInfoRes.add(new TipInfoRes(title, tipInfoDetailRes));
                 i++;
             } catch (NoSuchMessageException e) {
                 break; // tip 없음
@@ -149,28 +134,23 @@ public class EmploymentCheckService {
     }
 
     @Transactional
-    public void updateEmploymentCheck(Long memberId, UpdateEmplCheckReq updateEmplCheckReq) {
+    public UpdateEmplCheckRes updateEmploymentCheck(Long memberId, UpdateEmplCheckReq updateEmplCheckReq) {
+
         Member member = memberRepository.findById(memberId).orElseThrow(
                 () -> new CustomException(ErrorCode.USER_NOT_FOUND)
         );
-        member.updateCheckStep(updateEmplCheckReq.getMemberCheckStep());
+        member.updateCheckStep(updateEmplCheckReq.getCheckStep()); // 현재 업데이트 하는 곳 == 현재 회원이 진행하는 곳
 
-        List<EmploymentCheck> employmentChecks = employmentCheckRepository.findAllByMemberId(memberId);
+        EmploymentCheck employmentCheck = employmentCheckRepository.findByCheckStepAndSubmissionIdx(updateEmplCheckReq.getCheckStep(), updateEmplCheckReq.getSubmissionIdx()).orElseThrow(
+                () -> new CustomException(ErrorCode.EMPLOY_CHECK_NOT_FOUND)
+        );
+        employmentCheck.toggleIsChecked();
 
-        Map<String, Boolean> map = updateEmplCheckReq.getUpdateEmplCheckDetailReqs().stream()
-                .collect(Collectors.toMap(
-                        check -> check.getCheckStep().name() + "-" + check.getSubmissionIdx(),
-                        UpdateEmplCheckDetailReq::isChecked)
-                );
+        return new UpdateEmplCheckRes(calculateProgress(memberId));
+    }
 
-        for (EmploymentCheck employmentCheck : employmentChecks) {
-            String key = employmentCheck.getCheckStep() + "-" + employmentCheck.getSubmissionIdx();
-            if (map.containsKey(key)) {
-                employmentCheck.updateIsChecked(map.get(key));
-            } else {
-                throw new CustomException(ErrorCode.MISSING_REQUIRED_FIELD);
-            }
-        }
-
+    private int calculateProgress(Long memberId) {
+        int count = employmentCheckRepository.countByMemberIdAndIsCheckedTrue(memberId);
+        return Math.round((float) count / TOTAL * 100);
     }
 }

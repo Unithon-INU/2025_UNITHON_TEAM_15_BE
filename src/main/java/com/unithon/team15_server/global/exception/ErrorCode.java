@@ -23,6 +23,7 @@ public enum ErrorCode {
 
     //404 Not Found
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "404-1", "해당 회원이 존재하지 않습니다."),
+    EMPLOY_CHECK_NOT_FOUND(HttpStatus.NOT_FOUND, "404-2", "해당 Employ Check가 존재하지 않습니다."),
 
     //409 Conflict
     USER_ALREADY_REGISTERED(HttpStatus.CONFLICT, "409-1", "이미 존재하는 회원입니다.."),

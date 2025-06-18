@@ -16,6 +16,5 @@ public class DocumentInfoRes {
     private String title;
 
     @Schema(description = "체크리스트의 체크 유무", example = "true")
-    @JsonProperty("isChecked")
-    private boolean isChecked;
+    private Boolean isChecked;
 }

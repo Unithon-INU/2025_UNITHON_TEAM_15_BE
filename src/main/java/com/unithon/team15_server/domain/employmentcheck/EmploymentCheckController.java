@@ -3,12 +3,12 @@ package com.unithon.team15_server.domain.employmentcheck;
 import com.unithon.team15_server.domain.employmentcheck.dto.HomeInfoRes;
 import com.unithon.team15_server.domain.employmentcheck.dto.TipInfoRes;
 import com.unithon.team15_server.domain.employmentcheck.dto.UpdateEmplCheckReq;
+import com.unithon.team15_server.domain.employmentcheck.dto.UpdateEmplCheckRes;
 import com.unithon.team15_server.global.jwt.MemberDetail;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -37,11 +37,10 @@ public class EmploymentCheckController {
         return ResponseEntity.ok(employmentCheckService.getTipInfo(checkStep));
     }
 
-    @Operation(summary = "모든 step의 체크리스트 업데이트", description = "- 모든 step의 제출 서류의 체크리스트 업데이트")
-    @ApiResponse(responseCode = "204", description = "모든 step의 체크리스트 업데이트 성공")
+    @Operation(summary = "입력한 step의 체크리스트 업데이트", description = "- 입력한 step의 제출 서류의 체크리스트 업데이트")
+    @ApiResponse(responseCode = "200", description = "step의 체크리스트 업데이트 성공")
     @PutMapping
-    public ResponseEntity<Void> putEmploymentCheck(@AuthenticationPrincipal MemberDetail memberDetail, @RequestBody UpdateEmplCheckReq updateEmplCheckReq) {
-        employmentCheckService.updateEmploymentCheck(memberDetail.getId(), updateEmplCheckReq);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<UpdateEmplCheckRes> putEmploymentCheck(@AuthenticationPrincipal MemberDetail memberDetail, @RequestBody UpdateEmplCheckReq updateEmplCheckReq) {
+        return ResponseEntity.ok(employmentCheckService.updateEmploymentCheck(memberDetail.getId(), updateEmplCheckReq));
     }
 }
