@@ -5,7 +5,6 @@ import com.unithon.team15_server.domain.employmentcheck.dto.TipInfoRes;
 import com.unithon.team15_server.domain.employmentcheck.dto.UpdateEmplCheckReq;
 import com.unithon.team15_server.global.jwt.MemberDetail;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
