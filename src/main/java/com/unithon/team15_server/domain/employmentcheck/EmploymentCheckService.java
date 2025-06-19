@@ -26,6 +26,7 @@ public class EmploymentCheckService {
 
     @Transactional
     public void createEmploymentCheck(Long memberId) {
+        if (employmentCheckRepository.existsByMemberId(memberId)) return; // 회원가입했던 회원이 또 생성하는 것 방지 (for 프론트)
         List<EmploymentCheck> employmentChecks = new ArrayList<>();
         for (CheckStep checkStep : CheckStep.values()) {
             for (int i = 0; i < checkStep.getDocumentTotal(); i++) {
