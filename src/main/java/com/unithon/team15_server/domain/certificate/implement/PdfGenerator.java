@@ -40,6 +40,7 @@ public class PdfGenerator {
                     return startTime + "~" + endTime + "(" + days + ")";
                 })
                 .toList();
+
         List<String> workingEndDay = certificateReq.getWeekendWorkTimes().stream()
                 .map(time -> {
                     String startTime = time.getWorkingStartTime().format(DateTimeFormatter.ofPattern("HH:mm"));
