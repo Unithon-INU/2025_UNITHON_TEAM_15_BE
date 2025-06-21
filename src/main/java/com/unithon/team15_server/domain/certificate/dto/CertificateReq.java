@@ -1,6 +1,5 @@
 package com.unithon.team15_server.domain.certificate.dto;
 
-import com.unithon.team15_server.domain.certificate.dto.WorkTimeReq;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
