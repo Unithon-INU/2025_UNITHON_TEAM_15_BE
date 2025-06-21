@@ -13,4 +13,6 @@ public interface EmploymentCheckRepository extends JpaRepository<EmploymentCheck
     Optional<EmploymentCheck> findByMemberIdAndCheckStepAndSubmissionIdx(Long memberId, CheckStep checkStep, int submissionIdx);
 
     boolean existsByMemberId(Long memberId);
+
+    void deleteAllByMemberId(Long memberId);
 }

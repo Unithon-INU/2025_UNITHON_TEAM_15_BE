@@ -154,4 +154,16 @@ public class EmploymentCheckService {
         int count = employmentCheckRepository.countByMemberIdAndIsCheckedTrue(memberId);
         return Math.round((float) count / TOTAL * 100);
     }
+
+    @Transactional
+    public void resetProgress(Long memberId) {
+        Member member = memberRepository.findById(memberId).orElseThrow(
+                () -> new CustomException(ErrorCode.USER_NOT_FOUND)
+        );
+        member.updateCheckStep(CheckStep.STEP1); //STEP1로 초기화
+
+        //전체 삭제 후 다시 만들기
+        employmentCheckRepository.deleteAllByMemberId(memberId);
+        createEmploymentCheck(memberId);
+    }
 }

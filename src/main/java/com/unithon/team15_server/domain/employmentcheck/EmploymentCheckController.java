@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -39,8 +40,16 @@ public class EmploymentCheckController {
 
     @Operation(summary = "입력한 step의 체크리스트 업데이트", description = "- 입력한 step의 제출 서류의 체크리스트 업데이트")
     @ApiResponse(responseCode = "200", description = "step의 체크리스트 업데이트 성공")
-    @PutMapping
-    public ResponseEntity<UpdateEmplCheckRes> putEmploymentCheck(@AuthenticationPrincipal MemberDetail memberDetail, @RequestBody UpdateEmplCheckReq updateEmplCheckReq) {
+    @PatchMapping
+    public ResponseEntity<UpdateEmplCheckRes> patchEmploymentCheck(@AuthenticationPrincipal MemberDetail memberDetail, @RequestBody UpdateEmplCheckReq updateEmplCheckReq) {
         return ResponseEntity.ok(employmentCheckService.updateEmploymentCheck(memberDetail.getId(), updateEmplCheckReq));
+    }
+
+    @Operation(summary = "회원의 진행현황 초기화", description = "- 회원의 체크리스트 진행현황 전체 초기화")
+    @ApiResponse(responseCode = "204", description = "초기화 성공")
+    @PutMapping("/progress")
+    public ResponseEntity<Void> resetProgress(@AuthenticationPrincipal MemberDetail memberDetail) {
+        employmentCheckService.resetProgress(memberDetail.getId());
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
