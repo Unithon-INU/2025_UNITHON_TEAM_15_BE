@@ -2,6 +2,8 @@ package com.unithon.team15_server.domain.certificate;
 
 import com.lowagie.text.DocumentException;
 import com.unithon.team15_server.domain.certificate.dto.CertificateReq;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,8 @@ import java.io.IOException;
 public class certificateController {
     private final CertificateService certificateService;
 
+    @Operation(summary = "시간제취업확인서 전송", description = "- 시간제취업확인서를 만든 뒤, 입력된 이메일로 전송 (pdf파일 형식)")
+    @ApiResponse(responseCode = "204", description = "시간제취업확인서 전송 성공")
     @PostMapping
     public ResponseEntity<Void> sendCert(@RequestBody CertificateReq certificateReq) throws MessagingException, DocumentException, IOException {
         certificateService.sendCert(certificateReq);
