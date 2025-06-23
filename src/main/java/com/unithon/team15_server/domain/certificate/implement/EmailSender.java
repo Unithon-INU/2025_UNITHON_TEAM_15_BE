@@ -25,7 +25,7 @@ public class EmailSender {
 
         ByteArrayResource dataResource = new ByteArrayResource(pdfBytes, "application/pdf");
 
-        helper.addAttachment("certificate_ko.pdf", dataResource);
+        helper.addAttachment("certificate.pdf", dataResource);
         helper.setText("");
         javaMailSender.send(message);
     }

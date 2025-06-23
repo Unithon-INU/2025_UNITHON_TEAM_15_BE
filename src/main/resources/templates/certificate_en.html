@@ -1,0 +1,397 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style>
+        body {
+            text-align: justify;
+            line-height: 108%;
+            widows: 0;
+            orphans: 0;
+            font-family: 'NanumBarunGothic', sans-serif;
+            font-size: 10pt;
+            background: #FFFFFF;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <table cellspacing="0" cellpadding="0"
+           style="width:100%; max-width:500pt; margin-bottom:0pt; border-collapse:collapse;">
+        <tr style="height:41pt">
+            <td colspan="10"
+                style="width:466pt; border-style:solid solid double; border-width:1.38pt 1.38pt 1.5pt; padding:1.4pt 4.41pt; vertical-align:middle">
+                <p class="a" style="text-align:center; line-height:80%; font-size:15pt">
+                    <a name="_top"/>
+                    <span style="font-family:'NanumBarunGothic'">Part-time Work of Foreign Student Confirmation Form</span>
+                </p>
+            </td>
+        </tr>
+        <tr style="height:33.95pt">
+            <td rowspan="3"
+                style="width:30pt; border-style:double double double solid; border-width:1.5pt 1.5pt 1.5pt 1.38pt; padding:1.4pt 4.35pt 1.4pt 4.41pt; vertical-align:middle">
+                <p class="a" style="text-align:center; line-height:80%; font-size:12pt">
+                    <span style="font-family:'NanumBarunGothic'; font-weight:bold">Appli</span>
+                </p>
+                <p class="a" style="text-align:center; line-height:80%; font-size:12pt">
+                    <span style="font-family:'NanumBarunGothic'; font-weight:bold">-cant</span>
+                </p>
+            </td>
+            <!--            성명 작성-->
+            <td colspan="2"
+                style="width:57pt; border-style:double solid solid double; border-width:1.5pt 0.75pt 0.75pt 1.5pt; padding:1.4pt 4.72pt 1.4pt 4.35pt; vertical-align:middle; -aw-border-bottom:0.38pt single; -aw-border-right:0.38pt single">
+                <p class="a" style="text-align:center; line-height:80%; font-size:12pt">
+                    <span style="font-family:'NanumBarunGothic'">Name</span>
+                </p>
+            </td>
+            <td colspan="2"
+                style="width:138.8pt; border-style:double solid solid; border-width:1.5pt 0.75pt 0.75pt; padding:1pt 4.72pt; vertical-align:middle; -aw-border-bottom:0.38pt single; -aw-border-left:0.38pt single; -aw-border-right:0.38pt single">
+                <p class="a" style="text-align:center; font-size:12pt">
+                    <!--                    <span style="font-family:'NanumBarunGothic'; font-style:italic; -aw-import:ignore"> </span>-->
+                    <span th:text="${name}"></span>
+                </p>
+            </td>
+            <!--            외국인등록번호 작성-->
+            <td colspan="3"
+                style="width:51.1pt; border-style:double solid solid; border-width:1.5pt 0.75pt 0.75pt; padding:1.4pt 4.72pt; vertical-align:middle; -aw-border-bottom:0.38pt single; -aw-border-left:0.38pt single; -aw-border-right:0.38pt single">
+                <p class="a" style="text-align:center; font-size:10pt; margin:0; line-height:1.2;">
+                    <span style="font-family:'NanumBarunGothic'; letter-spacing:-0.85pt;">Foreign Resident</span><br/>
+                    <span style="font-family:'NanumBarunGothic'; letter-spacing:-0.85pt;">Registration No.</span>
+                </p>
+            </td>
+            <td colspan="2"
+                style="width:124.7pt; border-style:double solid solid; border-width:1.5pt 1.38pt 0.75pt 0.75pt; padding:1.4pt 4.41pt 1.4pt 4.72pt; vertical-align:middle; -aw-border-bottom:0.38pt single; -aw-border-left:0.38pt single">
+                <p class="a" style="text-align:center; line-height:80%; font-size:12pt">
+                    <!--                    <span style="font-family:'NanumBarunGothic'; font-style:italic; -aw-import:ignore"> </span>-->
+                    <span th:text="${regNum}"></span>
+                </p>
+            </td>
+        </tr>
+        <tr style="height:33.05pt">
+            <!--            학과 작성-->
+            <td colspan="2"
+                style="width:57pt; border-style:solid solid solid double; border-width:0.75pt 0.75pt 0.75pt 1.5pt; padding:1.4pt 4.72pt 1.4pt 4.35pt; vertical-align:middle; -aw-border-bottom:0.38pt single; -aw-border-right:0.38pt single; -aw-border-top:0.38pt single">
+                <p class="a" style="text-align:center; font-size:12pt; margin:0; line-height:1;">
+                    <span style="font-family:'NanumBarunGothic'; letter-spacing:-0.85pt">Department</span><br/>
+                    <span style="font-family:'NanumBarunGothic'; letter-spacing:-0.85pt">(Major)</span>
+                </p>
+            </td>
+            <td colspan="2"
+                style="width:138.8pt; border-style:solid; border-width:0.75pt; padding:1.4pt 4.72pt; vertical-align:middle; -aw-border:0.38pt single">
+                <p class="a" style="text-align:center; line-height:80%; font-size:12pt">
+                    <!--                    <span style="font-family:'NanumBarunGothic'; font-style:italic; -aw-import:ignore"> </span>-->
+                    <span th:text="${major}"></span>
+                </p>
+            </td>
+            <!--            이수학기 작성-->
+            <td colspan="3"
+                style="width:51.1pt; border-style:solid; border-width:0.75pt; padding:1.4pt 4.72pt; vertical-align:middle; -aw-border:0.38pt single">
+                <p class="a" style="text-align:center; line-height:80%; font-size:12pt">
+                    <span style="font-family:'NanumBarunGothic'; letter-spacing:-0.8pt">Term</span>
+                </p>
+            </td>
+            <td colspan="2"
+                style="width:124.7pt; border-style:solid; border-width:0.75pt 1.38pt 0.75pt 0.75pt; padding:1.4pt 4.41pt 1.4pt 4.72pt; vertical-align:middle; -aw-border-bottom:0.38pt single; -aw-border-left:0.38pt single; -aw-border-top:0.38pt single">
+                <p class="a" style="text-align:center; line-height:80%; font-size:12pt">
+                    <span th:text="${semester}"></span>
+                </p>
+            </td>
+        </tr>
+        <tr style="height:24.35pt">
+            <td colspan="2"
+                style="width:57pt; border-style:solid solid double double; border-width:0.75pt 0.75pt 1.5pt 1.5pt; padding:0.3pt 4.35pt; vertical-align:middle;">
+                <p class="a" style="text-align:center; line-height:1; font-size:11pt; margin:0;">
+                    <span style="font-family:'NanumBarunGothic';">Tel No.</span>
+                </p>
+            </td>
+            <td colspan="2"
+                style="width:138.8pt; border-style:solid solid double; border-width:0.75pt 0.75pt 1.5pt; padding:0.3pt 4.72pt; vertical-align:middle;">
+                <p class="a" style="text-align:center; line-height:1; font-size:11pt; margin:0;">
+                    <span th:text="${phoneNum}"></span>
+                </p>
+            </td>
+            <td colspan="3"
+                style="width:51.1pt; border-style:solid solid double; border-width:0.75pt 0.75pt 1.5pt; padding:0.3pt 4.72pt; vertical-align:middle;">
+                <p class="a" style="text-align:center; line-height:1; font-size:11pt; margin:0;">
+                    <span style="font-family:'NanumBarunGothic';">E-Mail</span>
+                </p>
+            </td>
+            <td colspan="2"
+                style="width:124.7pt; border-style:solid solid double; border-width:0.75pt 1.38pt 1.5pt 0.75pt; padding:0.3pt 4.41pt; vertical-align:middle;">
+                <p class="a" style="text-align:center; line-height:1; font-size:11pt; margin:0;">
+                    <span th:text="${email}"></span>
+                </p>
+            </td>
+        </tr>
+
+        <tr style="height:27.5pt">
+            <td rowspan="6"
+                style="width:30pt; border-style:double double double solid; border-width:1.5pt 1.5pt 1.5pt 1.38pt; padding:1.4pt 4.35pt 1.4pt 4.41pt; vertical-align:middle">
+                <p class="a" style="text-align:center; line-height:80%; font-size:12pt">
+                    <span style="font-family:'NanumBarunGothic'; font-weight:bold; letter-spacing:-0.7pt">The</span>
+                </p>
+                <p class="a" style="text-align:center; line-height:80%; font-size:12pt">
+                    <span style="font-family:'NanumBarunGothic'; font-weight:bold; letter-spacing:-0.7pt">expected</span>
+                </p>
+                <p class="a" style="text-align:center; line-height:80%; font-size:12pt">
+                    <span style="font-family:'NanumBarunGothic'; font-weight:bold; letter-spacing:-0.3pt">place of </span>
+                </p>
+                <p class="a" style="text-align:center; line-height:80%; font-size:12pt">
+                    <span style="font-family:'NanumBarunGothic'; font-weight:bold; letter-spacing:-0.7pt">employ-</span>
+                </p>
+                <p class="a" style="text-align:center; line-height:80%; font-size:12pt">
+                    <span style="font-family:'NanumBarunGothic'; font-weight:bold; letter-spacing:-0.3pt">ment</span>
+                </p>
+            </td>
+            <!--            업체명 작성-->
+            <td colspan="2"
+                style="width:57pt; border-style:double solid solid double; border-width:1.5pt 0.75pt 0.75pt 1.5pt; padding:1.4pt 4.72pt 1.4pt 4.35pt; vertical-align:middle; -aw-border-bottom:0.38pt single; -aw-border-right:0.38pt single">
+                <p class="a" style="text-align:center; line-height:80%; font-size:12pt">
+                    <span style="font-family:'NanumBarunGothic'; font-size:12pt;">Company<br/>Name</span>
+                </p>
+            </td>
+            <td colspan="7"
+                style="width:335pt; border-style:double solid solid; border-width:1.5pt 1.38pt 0.75pt 0.75pt; padding:1.4pt 4.41pt 1.4pt 4.72pt; vertical-align:middle; -aw-border-bottom:0.38pt single; -aw-border-left:0.38pt single">
+                <p class="a" style="text-align:center; line-height:80%; font-size:12pt">
+                    <span th:text="${companyName}"></span>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <!--            사업자등록번호 작성-->
+            <td colspan="2"
+                style="width:57pt; height:40pt; border-style:solid solid solid double; border-width:0.75pt 0.75pt 0.75pt 1.5pt; padding:0.3pt 4.35pt; vertical-align:middle;">
+                <p class="a" style="text-align:center; line-height:1.2; font-size:11pt; margin:0;">
+                    <span style="font-family:'NanumBarunGothic'; font-size:11pt;">Business<br/>Registration No.</span>
+                </p>
+            </td>
+            <td colspan="3"
+                style="width:158.6pt; height:40pt; border-style:solid; border-width:0.75pt; padding:0.3pt 4.72pt; vertical-align:middle;">
+                <p class="a" style="text-align:center; line-height:1; font-size:12pt; margin:0;">
+                    <span th:text="${bizRegNum}"></span>
+                </p>
+            </td>
+            <!--            업종 작성-->
+            <td colspan="3"
+                style="width:48.25pt; height:40pt; border-style:solid; border-width:0.75pt; padding:0.3pt 4.72pt; vertical-align:middle;">
+                <p class="a" style="text-align:center; line-height:1; font-size:11pt; margin:0;">
+                    <span style="font-family:'NanumBarunGothic';">Type of Industry</span>
+                </p>
+            </td>
+            <td
+                    style="width:107.75pt; height:40pt; border-style:solid; border-width:0.75pt 1.38pt 0.75pt 0.75pt; padding:0.3pt 4.72pt; vertical-align:middle;">
+                <p class="a" style="text-align:center; line-height:1; font-size:12pt; margin:0;">
+                    <span th:text="${industry}"></span>
+                </p>
+            </td>
+        </tr>
+
+        <tr style="height:30.5pt">
+            <td colspan="2"
+                style="width:57pt; border-style:solid solid solid double; border-width:0.75pt 0.75pt 0.75pt 1.5pt; padding:0.5pt 2pt; vertical-align:middle; text-align:center;">
+                <p style="margin:0; padding:0; line-height:1; font-size:12pt;">
+                    <span style="font-family:'NanumBarunGothic'; letter-spacing:0.65pt">Address</span>
+                </p>
+            </td>
+            <td colspan="7"
+                style="width:335pt; border-style:solid; border-width:0.75pt 1.38pt 0.75pt 0.75pt; padding:0.5pt 2pt; vertical-align:middle; text-align:center;">
+                <p style="margin:0; padding:0; line-height:1; font-size:12pt;">
+                    <span th:text="${address}"></span>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <!--            고용주 작성-->
+            <td colspan="2"
+                style="width:57pt; height:30pt; border-style:solid solid solid double; border-width:0.75pt 0.75pt 0.75pt 1.5pt; padding:0.3pt 4.35pt; vertical-align:middle;">
+                <p class="a" style="text-align:center; line-height:1; font-size:12pt; margin:0;">
+                    <span style="font-family:'NanumBarunGothic'; letter-spacing:-0.1pt;">Employer</span>
+                </p>
+            </td>
+            <td colspan="3"
+                style="width:158.6pt; height:30pt; border-style:solid; border-width:0.75pt; padding:0.3pt 4.72pt; vertical-align:middle;">
+                <p class="a" style="text-align:right; line-height:1; font-size:12pt; margin:0;">
+                    <span style="font-family:'NanumBarunGothic';">(Seal/Sig)</span>
+                </p>
+            </td>
+            <!--           사업자전화번호 작성-->
+            <td colspan="3"
+                style="width:48.25pt; height:30pt; border-style:solid; border-width:0.75pt; padding:0.3pt 4.72pt; vertical-align:middle;">
+                <p class="a" style="text-align:center; line-height:1; font-size:12pt; margin:0;">
+                    <span style="font-family:'NanumBarunGothic'; letter-spacing:-0.1pt;">Tel No.</span>
+                </p>
+            </td>
+            <td
+                    style="width:107.75pt; height:30pt; border-style:solid; border-width:0.75pt 1.38pt 0.75pt 0.75pt; padding:0.3pt 4.72pt; vertical-align:middle;">
+                <p class="a" style="text-align:center; line-height:1; font-size:12pt; margin:0;">
+                    <span th:text="${companyPhoneNum}"></span>
+                </p>
+            </td>
+        </tr>
+        <tr style="height:40.85pt">
+            <!--            취업기간 작성-->
+            <td colspan="2"
+                style="width:57pt; border-style:solid solid solid double; border-width:0.75pt 0.75pt 0.75pt 1.5pt; padding:1.4pt 4.72pt 1.4pt 4.35pt; vertical-align:middle; -aw-border-bottom:0.38pt single; -aw-border-right:0.38pt single; -aw-border-top:0.38pt single">
+                <p class="a" style="text-align:center; line-height:80%; font-size:12pt">
+                    <span style="font-family:'NanumBarunGothic'">Period of Working</span>
+                </p>
+            </td>
+            <td colspan="3"
+                style="width:158.6pt; border-style:solid; border-width:0.75pt; padding:1.4pt 4.72pt; vertical-align:middle; -aw-border:0.38pt single">
+                <p class="a" style="text-align:center; line-height:80%; font-size:12pt">
+                    <span th:text="${period}"></span>
+                </p>
+            </td>
+            <!--            급여 작성-->
+            <td colspan="3"
+                style="width:48.25pt; border-style:solid; border-width:0.75pt; padding:1.4pt 4.72pt; vertical-align:middle; -aw-border:0.38pt single; text-align:center;">
+                <span style="font-family:'NanumBarunGothic'; font-size:11pt;">Wage<br/>(Per hour)</span>
+            </td>
+            <td style="width:107.75pt; border-style:solid; border-width:0.75pt 1.38pt 0.75pt 0.75pt; padding:1.4pt 4.41pt 1.4pt 4.72pt; vertical-align:middle; -aw-border-bottom:0.38pt single; -aw-border-left:0.38pt single; -aw-border-top:0.38pt single">
+                <p class="a" style="text-align:center; line-height:80%; font-size:12pt">
+                    <span th:text="${hourlyWage}"></span>
+                </p>
+            </td>
+        </tr>
+        <tr style="height:27.5pt">
+            <!--            근무시간 작성-->
+            <td colspan="2"
+                style="width:57pt; border-style:solid solid double double; border-width:0.75pt 0.75pt 1.5pt 1.5pt; padding:1.4pt 4.72pt 1.4pt 4.35pt; vertical-align:middle; -aw-border-right:0.38pt single; -aw-border-top:0.38pt single">
+                <p class="a" style="text-align:center; line-height:80%; font-size:12pt">
+                    <span style="font-family:'NanumBarunGothic'; letter-spacing:-0.2pt">Working Hours</span>
+                </p>
+            </td>
+            <td colspan="7"
+                style="width:335pt; border-style:solid solid double; border-width:0.75pt 1.38pt 1.5pt 0.75pt; padding:4pt 4.41pt; vertical-align:middle; font-family:'NanumBarunGothic';">
+
+                <table style="width:100%; border:none; border-collapse:collapse;">
+                    <td style="vertical-align:top; padding-right:10pt; padding-right:5pt; width: 240px;">
+                        <p style="margin: 0; font-size: 11pt;">
+                            <span>Weekday: </span>
+                            <span th:text="${weekDayWorkTimes.size() > 0} ? ${weekDayWorkTimes[0]} : ''"></span>
+                        </p>
+                        <th:block th:each="time, iterStat : ${weekDayWorkTimes}">
+                            <th:block th:if="${iterStat.index > 0}">
+                                <p style="margin: 0; font-size: 11pt; padding-left: 27pt;">
+                                    <span th:text="${time}"></span>
+                                </p>
+                            </th:block>
+                        </th:block>
+                    </td>
+
+                    <!-- 주말 근무시간 -->
+                    <td style="vertical-align: top;">
+                        <p style="margin: 0; font-size: 11pt;">
+                            <span>Sat-Sun: </span>
+                            <span th:text="${weekEndWorkTimes.size() > 0} ? ${weekEndWorkTimes[0]} : ''"></span>
+                        </p>
+                        <th:block th:each="time, iterStat : ${weekEndWorkTimes}">
+                            <th:block th:if="${iterStat.index > 0}">
+                                <p style="margin: 0; font-size: 11pt; padding-left: 50pt;">
+                                    <span th:text="${time}"></span>
+                                </p>
+                            </th:block>
+                        </th:block>
+                    </td>
+                </table>
+            </td>
+
+        </tr>
+        <tr style="height:80.55pt">
+            <td colspan="10"
+                style="width:466pt; border-style:double solid; border-width:1.5pt 1.38pt; padding:1.4pt 4.41pt; vertical-align:middle">
+                <p class="a" style="margin-left:4.75pt; line-height:115%; font-size:12pt">
+                    <span style="line-height:115%; font-family:'HCI Poppy'; font-size:11pt; -aw-import:spaces">  </span>
+                    <span style="font-family:'NanumBarunGothic'; letter-spacing:-0.3pt">I hereby confirm that the above named student is enrolled at our university, </span>
+                    <span style="font-family:'NanumBarunGothic'"> </span>
+                    <span style="font-family:'NanumBarunGothic'; letter-spacing:-0.25pt">and considering his/her academic and research progress hitherto, </span>
+                    <span style="font-family:'NanumBarunGothic'; letter-spacing:-0.1pt">I believe that the part-time job indicated above will not impede his/her learning (research) in school. </span>
+                </p>
+                <!--                날짜 작성-->
+                <p class="a" style="margin-left:4.75pt; text-align:center; line-height:80%; font-size:12pt">
+                    <span th:text="${date}"></span>
+                </p>
+            </td>
+        </tr>
+        <tr style="height:40pt">
+            <td colspan="10"
+                style="width:466pt; border-style:double solid solid; border-width:1.5pt 1.38pt 1.38pt; padding:1.4pt 4.41pt; vertical-align:middle">
+                <p class="a" style="text-align:center; line-height:80%; font-size:13pt">
+                    <span style="font-family:'NanumBarunGothic'">◌ ◌ </span>
+                    <span style="font-family:'NanumBarunGothic'">The head of immigration (branch) office</span>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="1" rowspan="3"
+                style="width:73.65pt; height:80pt; border-style:solid double solid solid; border-width:1.38pt 1.5pt 1.38pt 1.38pt; padding:0.3pt 4.35pt; vertical-align:middle;">
+                <p class="a" style="text-align:center; line-height:1.2; font-size:12pt; margin:0;">
+                    <span style="font-family:'NanumBarunGothic'; font-weight:bold; letter-spacing:-0.25pt;">Confirmation</span>
+                </p>
+                <p class="a" style="text-align:center; line-height:1.2; font-size:12pt; margin:0;">
+                    <span style="font-family:'NanumBarunGothic'; font-weight:bold; letter-spacing:-0.25pt;">from a Uni.</span>
+                </p>
+                <p class="a" style="text-align:center; line-height:1.2; font-size:12pt; margin:0;">
+                    <span style="font-family:'NanumBarunGothic'; font-weight:bold; letter-spacing:-0.25pt;">Official.</span>
+                </p>
+            </td>
+            <td colspan="2"
+                style="width:53.9pt; height:18pt; border-style:solid solid solid double; border-width:1.38pt 0.75pt 0.75pt 1.5pt; padding:0.3pt 4.35pt; vertical-align:middle;">
+                <p class="a" style="text-align:center; line-height:1; font-size:12pt; margin:0;">
+                    <span style="font-family:'NanumBarunGothic'; letter-spacing:-0.8pt;">Uni.</span>
+                </p>
+            </td>
+            <td style="width:121.85pt; height:18pt; border-style:solid; border-width:1.38pt 0.75pt 0.75pt; padding:0.3pt 4.72pt; vertical-align:middle;">
+                <p class="a" style="text-align:center; line-height:1; font-size:12pt; margin:0;">
+                </p>
+            </td>
+            <td colspan="2" rowspan="3"
+                style="width:31.25pt; height:80pt; border-style:solid; border-width:1.38pt 0.75pt; padding:0.3pt 4.72pt; vertical-align:middle;">
+                <p class="a" style="text-align:center; line-height:1; font-size:12pt; margin:0;">
+                    <span style="font-family:'NanumBarunGothic';">Name</span>
+                </p>
+            </td>
+            <td colspan="4" rowspan="3"
+                style="width:144.55pt; height:80pt; border-style:solid; border-width:1.38pt 1.38pt 1.38pt 0.75pt; padding:0.3pt 4.41pt; vertical-align:middle;">
+                <p class="a" style="text-align:right; line-height:1; font-size:12pt; margin:0;">
+                    <span style="font-family:'NanumBarunGothic';">(Seal/Sig)</span>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"
+                style="width:53.9pt; height:30pt; border-style:solid solid solid double; border-width:0.75pt 0.75pt 0.75pt 1.5pt; padding:0.3pt 4.35pt; vertical-align:middle;">
+                <p class="a" style="text-align:center; line-height:1; font-size:12pt; margin:0;">
+                    <span style="font-family:'NanumBarunGothic'; letter-spacing:-0.8pt;">IEQAS</span>
+                </p>
+            </td>
+            <td style="width:121.85pt; height:30pt; border-style:solid; border-width:0.75pt; padding:0.3pt 4.72pt; vertical-align:middle;">
+                <p class="a" style="text-align:center; line-height:1; font-size:12pt; margin:0;">
+                    <span style="font-family:'NanumBarunGothic';">YES □ NO □</span>
+                </p>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2"
+                style="width:53.9pt; height:35pt; border-style:solid solid solid double; border-width:0.75pt 0.75pt 1.38pt 1.5pt; padding:0.3pt 4.35pt; vertical-align:middle;">
+                <p class="a" style="text-align:center; line-height:1; font-size:12pt; margin:0;">
+                    <span style="font-family:'NanumBarunGothic'; letter-spacing:-0.8pt;">Job Position</span>
+                </p>
+                <p class="a" style="text-align:center; line-height:1; font-size:12pt; margin:0;">
+                    <span style="font-family:'NanumBarunGothic'; letter-spacing:-0.8pt;">(Tel No.)</span>
+                </p>
+            </td>
+            <td style="width:121.85pt; height:35pt; border-style:solid; border-width:0.75pt 0.75pt 1.38pt; padding:0.3pt 4.72pt; vertical-align:middle;">
+                <p class="a" style="text-align:center; line-height:1; font-size:12pt; margin:0;">
+                    <span style="font-family:'NanumBarunGothic';"> </span>
+                </p>
+            </td>
+        </tr>
+    </table>
+    <p class="a" style="line-height:80%">
+        <span style="-aw-import:ignore"> </span>
+    </p>
+</div>
+</body>
+</html>

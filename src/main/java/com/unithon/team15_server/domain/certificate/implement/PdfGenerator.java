@@ -3,6 +3,7 @@ package com.unithon.team15_server.domain.certificate.implement;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.pdf.BaseFont;
 import com.unithon.team15_server.domain.certificate.dto.CertificateReq;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.context.Context;
@@ -73,7 +74,7 @@ public class PdfGenerator {
         data.put("date", date);
         context.setVariables(data);
 
-        return engine.process("certificate_ko", context);
+        return engine.process(getCertificate(), context);
     }
 
     public byte[] generatePdf(String html) throws DocumentException, IOException {
@@ -96,5 +97,10 @@ public class PdfGenerator {
 
         iTextRenderer.layout();
         return iTextRenderer;
+    }
+
+    private String getCertificate() {
+        String lang = LocaleContextHolder.getLocale().getLanguage();
+        return "certificate_" + lang;
     }
 }
