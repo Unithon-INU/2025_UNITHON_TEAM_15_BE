@@ -50,6 +50,7 @@ public class PdfGenerator {
                 })
                 .toList();
 
+        String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd"));
 
         Context context = new Context();
         Map<String, Object> data = new HashMap<>();
@@ -68,6 +69,7 @@ public class PdfGenerator {
         data.put("hourlyWage", certificateReq.getHourlyWage());
         data.put("weekDayWorkTimes", workingWeekday);
         data.put("weekEndWorkTimes", workingEndDay);
+        data.put("date", date);
         context.setVariables(data);
 
         return engine.process("certificate_ko", context);
