@@ -64,6 +64,7 @@ public class EmploymentCheckService {
 
         return HomeInfoRes.builder()
                 .nickname(member.getNickname())
+                .email(member.getEmail())
                 .progress(calculateProgress(memberId)) // progress 계산해서 넣기
                 .memberCheckStep(memberCheckStep)
                 .employmentCheckRes(employmentCheckRes)
