@@ -8,6 +8,7 @@ import com.unithon.team15_server.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.NoSuchMessageException;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,7 +56,7 @@ public class EmploymentCheckService {
             for (int i = 0; i < employmentChecks.size(); i++) {
                 documentInfoRes.add(DocumentInfoRes.builder()
                         .submissionIdx(i)
-                        .title(messageSource.getMessage("main.step." + checkStep.getInx() + ".submissionDocument." + i, null, Locale.KOREAN))
+                        .title(messageSource.getMessage("main.step." + checkStep.getInx() + ".submissionDocument." + i, null, getCurrentLocale()))
                         .isChecked(employmentChecks.get(i).getIsChecked())
                         .build());
             }
@@ -77,13 +78,13 @@ public class EmploymentCheckService {
         System.out.println("prefix: " + prefix);
         List<String> precautions = new ArrayList<>();
         for (int i = 0; i < checkStep.getPrecautionTotal(); i++) {
-            precautions.add(messageSource.getMessage(prefix + ".precautions." + i, null, Locale.KOREAN));
-            System.out.println(messageSource.getMessage(prefix + ".precautions." + i, null, Locale.KOREAN));
+            precautions.add(messageSource.getMessage(prefix + ".precautions." + i, null, getCurrentLocale()));
+            System.out.println(messageSource.getMessage(prefix + ".precautions." + i, null, getCurrentLocale()));
         }
 
         return StepInfoRes.builder()
-                .title(messageSource.getMessage(prefix + ".title", null, Locale.KOREAN))
-                .subtitle(messageSource.getMessage(prefix + ".subtitle", null, Locale.KOREAN))
+                .title(messageSource.getMessage(prefix + ".title", null, getCurrentLocale()))
+                .subtitle(messageSource.getMessage(prefix + ".subtitle", null, getCurrentLocale()))
                 .precautions(precautions)
                 .build();
     }
@@ -96,26 +97,26 @@ public class EmploymentCheckService {
         while (true) {
             try {
                 String prefix = "main.step." + checkStepInx + ".tip." + i;
-                String title = messageSource.getMessage(prefix + ".title", null, Locale.KOREAN);
+                String title = messageSource.getMessage(prefix + ".title", null, getCurrentLocale());
                 List<TipInfoDetailRes> tipInfoDetailRes = new ArrayList<>();
 
                 int j = 0;
                 while (true) {
                     try {
 
-                        String itemContent = messageSource.getMessage(prefix + ".item.content." + j, null, Locale.KOREAN);
+                        String itemContent = messageSource.getMessage(prefix + ".item.content." + j, null, getCurrentLocale());
                         System.out.println("itemContent:" + itemContent);
 
                         String itemTitle = null;
                         try {
-                            itemTitle = messageSource.getMessage(prefix + ".item.title." + j, null, Locale.KOREAN);
+                            itemTitle = messageSource.getMessage(prefix + ".item.title." + j, null, getCurrentLocale());
                         } catch (NoSuchMessageException e) {
                             itemTitle = ""; // item의 title이 없음
                         }
 
                         String warning = null;
                         try {
-                            warning = messageSource.getMessage(prefix + ".warning." + j, null, Locale.KOREAN);
+                            warning = messageSource.getMessage(prefix + ".warning." + j, null, getCurrentLocale());
                         } catch (NoSuchMessageException e) {
                             warning = "";
                         }
@@ -166,5 +167,9 @@ public class EmploymentCheckService {
         //전체 삭제 후 다시 만들기
         employmentCheckRepository.deleteAllByMemberId(memberId);
         createEmploymentCheck(memberId);
+    }
+
+    private Locale getCurrentLocale() {
+        return LocaleContextHolder.getLocale();
     }
 }
