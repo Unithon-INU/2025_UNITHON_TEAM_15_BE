@@ -14,6 +14,9 @@ public class HomeInfoRes {
     @Schema(description = "회원의 닉네임", example = "봉식이")
     private String nickname;
 
+    @Schema(description = "회원의 이메일", example = "asdf@gmail.com")
+    private String email;
+    
     @Schema(description = "진행 현황")
     private int progress;
 
