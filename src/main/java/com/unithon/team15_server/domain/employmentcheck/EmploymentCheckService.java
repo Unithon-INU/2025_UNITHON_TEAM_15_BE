@@ -23,7 +23,7 @@ public class EmploymentCheckService {
     private final EmploymentCheckRepository employmentCheckRepository;
     private final MemberRepository memberRepository;
     private final MessageSource messageSource;
-    private final static int TOTAL = 10; //TODO 총 제출 서류 바뀌면 수정하기
+    private final static int TOTAL = 8;
 
     @Transactional
     public void createEmploymentCheck(Long memberId) {
