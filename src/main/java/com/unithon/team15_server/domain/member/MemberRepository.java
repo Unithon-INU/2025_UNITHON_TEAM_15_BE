@@ -27,4 +27,12 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
             """)
     MemberProfileGetRes findMemberProfileById(Long id);
 
+    @Query("""
+                SELECT CASE WHEN COUNT(m) > 0 THEN TRUE ELSE FALSE END 
+                FROM Member m
+                WHERE m.id = :id
+                AND m.industry LIKE CONCAT('%', :keyword, '%')
+            """)
+    boolean existsByIdAndIndustryContaining(Long id, String keyword);
+
 }

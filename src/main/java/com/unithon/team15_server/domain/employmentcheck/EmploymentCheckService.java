@@ -23,7 +23,6 @@ public class EmploymentCheckService {
     private final EmploymentCheckRepository employmentCheckRepository;
     private final MemberRepository memberRepository;
     private final MessageSource messageSource;
-    private final static int TOTAL = 8;
 
     @Transactional
     public void createEmploymentCheck(Long memberId) {
@@ -33,6 +32,10 @@ public class EmploymentCheckService {
             for (int i = 0; i < checkStep.getDocumentTotal(); i++) {
                 employmentChecks.add(EmploymentCheck.create(memberId, checkStep, i));
             }
+        }
+
+        if(memberRepository.existsByIdAndIndustryContaining(memberId, "음식")){
+            employmentChecks.add(EmploymentCheck.create(memberId, CheckStep.STEP2, 5));
         }
 
         employmentCheckRepository.saveAll(employmentChecks);
@@ -153,8 +156,9 @@ public class EmploymentCheckService {
     }
 
     private int calculateProgress(Long memberId) {
+        int total = employmentCheckRepository.countByMemberId(memberId);
         int count = employmentCheckRepository.countByMemberIdAndIsCheckedTrue(memberId);
-        return Math.round((float) count / TOTAL * 100);
+        return Math.round((float) count / total * 100);
     }
 
     @Transactional

@@ -7,6 +7,7 @@ import java.util.Optional;
 
 public interface EmploymentCheckRepository extends JpaRepository<EmploymentCheck, Long> {
     int countByMemberIdAndIsCheckedTrue(Long memberId);
+    int countByMemberId(Long memberId);
 
     List<EmploymentCheck> findAllByMemberIdAndCheckStep(Long memberId, CheckStep checkStep);
 

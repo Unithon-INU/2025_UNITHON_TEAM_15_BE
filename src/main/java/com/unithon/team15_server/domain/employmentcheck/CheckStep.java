@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum CheckStep {
     STEP1(1, 1, 3),
-    STEP2(2, 5, 4),
+    STEP2(2, 5, 5),
     STEP3(3, 2, 3);
 
     private final int inx;
