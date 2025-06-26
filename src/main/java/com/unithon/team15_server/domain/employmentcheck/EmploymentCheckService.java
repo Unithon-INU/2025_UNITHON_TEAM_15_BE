@@ -78,11 +78,10 @@ public class EmploymentCheckService {
     private StepInfoRes getStepInfo(CheckStep checkStep) {
         int checkStepInx = checkStep.getInx();
         String prefix = "main.step." + checkStepInx;
-        System.out.println("prefix: " + prefix);
+
         List<String> precautions = new ArrayList<>();
         for (int i = 0; i < checkStep.getPrecautionTotal(); i++) {
             precautions.add(messageSource.getMessage(prefix + ".precautions." + i, null, getCurrentLocale()));
-            System.out.println(messageSource.getMessage(prefix + ".precautions." + i, null, getCurrentLocale()));
         }
 
         return StepInfoRes.builder()
@@ -108,7 +107,6 @@ public class EmploymentCheckService {
                     try {
 
                         String itemContent = messageSource.getMessage(prefix + ".item.content." + j, null, getCurrentLocale());
-                        System.out.println("itemContent:" + itemContent);
 
                         String itemTitle = null;
                         try {
