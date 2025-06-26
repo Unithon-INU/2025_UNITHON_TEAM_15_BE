@@ -34,7 +34,7 @@ public class EmploymentCheckService {
             }
         }
 
-        if(memberRepository.existsByIdAndIndustryContaining(memberId, "음식")){
+        if (memberRepository.existsByIdAndIndustryContaining(memberId, "음식")) {
             employmentChecks.add(EmploymentCheck.create(memberId, CheckStep.STEP2, 5));
         }
 
