@@ -97,7 +97,7 @@
                 </p>
             </td>
         </tr>
-        <tr style="height:24.35pt">
+        <tr style="height:30pt">
             <td colspan="2"
                 style="width:57pt; border-style:solid solid double double; border-width:0.75pt 0.75pt 1.5pt 1.5pt; padding:0.3pt 4.35pt; vertical-align:middle;">
                 <p class="a" style="text-align:center; line-height:1; font-size:11pt; margin:0;">
@@ -120,6 +120,7 @@
                 style="width:124.7pt; border-style:solid solid double; border-width:0.75pt 1.38pt 1.5pt 0.75pt; padding:0.3pt 4.41pt; vertical-align:middle;">
                 <p class="a" style="text-align:center; line-height:1; font-size:11pt; margin:0;">
                     <span th:text="${email}"></span>
+                    <span th:text="${email}">asdfqwerasdasfsasa@gmail.com</span>
                 </p>
             </td>
         </tr>
@@ -258,44 +259,36 @@
             <td colspan="2"
                 style="width:57pt; border-style:solid solid double double; border-width:0.75pt 0.75pt 1.5pt 1.5pt; padding:1.4pt 4.72pt 1.4pt 4.35pt; vertical-align:middle; -aw-border-right:0.38pt single; -aw-border-top:0.38pt single">
                 <p class="a" style="text-align:center; line-height:80%; font-size:12pt">
-                    <span style="font-family:'NanumBarunGothic'; letter-spacing:-0.2pt">Working Hours</span>
+                    <span style="font-family:'NanumBarunGothic'; letter-spacing:-0.2pt">근무시간</span>
                 </p>
             </td>
             <td colspan="7"
                 style="width:335pt; border-style:solid solid double; border-width:0.75pt 1.38pt 1.5pt 0.75pt; padding:4pt 4.41pt; vertical-align:middle; font-family:'NanumBarunGothic';">
-
                 <table style="width:100%; border:none; border-collapse:collapse;">
                     <td style="vertical-align:top; padding-right:10pt; padding-right:5pt; width: 240px;">
-                        <p style="margin: 0; font-size: 11pt;">
+                        <p style="margin: 0 0 2pt 0; font-size: 11pt;">
                             <span>Weekday: </span>
-                            <span th:text="${weekDayWorkTimes.size() > 0} ? ${weekDayWorkTimes[0]} : ''"></span>
                         </p>
-                        <th:block th:each="time, iterStat : ${weekDayWorkTimes}">
-                            <th:block th:if="${iterStat.index > 0}">
-                                <p style="margin: 0; font-size: 11pt; padding-left: 27pt;">
+                        <th:block th:each="time : ${weekDayWorkTimes}">
+                                <p style="margin: 0; font-size: 11pt;;">
                                     <span th:text="${time}"></span>
                                 </p>
-                            </th:block>
                         </th:block>
                     </td>
 
                     <!-- 주말 근무시간 -->
                     <td style="vertical-align: top;">
-                        <p style="margin: 0; font-size: 11pt;">
+                        <p style="margin: 0 0 2pt 0; font-size: 11pt;">
                             <span>Sat-Sun: </span>
-                            <span th:text="${weekEndWorkTimes.size() > 0} ? ${weekEndWorkTimes[0]} : ''"></span>
                         </p>
-                        <th:block th:each="time, iterStat : ${weekEndWorkTimes}">
-                            <th:block th:if="${iterStat.index > 0}">
-                                <p style="margin: 0; font-size: 11pt; padding-left: 50pt;">
-                                    <span th:text="${time}"></span>
-                                </p>
-                            </th:block>
+                        <th:block th:each="time : ${weekEndWorkTimes}">
+                            <p style="margin: 0; font-size: 11pt;">
+                                <span th:text="${time}"></span>
+                            </p>
                         </th:block>
                     </td>
                 </table>
             </td>
-
         </tr>
         <tr style="height:80.55pt">
             <td colspan="10"

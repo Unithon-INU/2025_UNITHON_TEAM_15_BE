@@ -6,21 +6,25 @@
 
 </head>
 <body style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;background-color: #f4f4f4;padding: 30px;color: #333;">
-<div class="container" style="max-width: 600px;margin: auto;background-color: #ffffff;padding: 40px;border-radius: 8px;box-shadow: 0 0 10px rgba(0,0,0,0.05);">
-    <div class="logo" style="text-align: center;font-size: 28px;font-weight: bold;color: #FFCC33;">YourApp</div>
+<div class="container"
+     style="max-width: 600px;margin: auto;background-color: #ffffff;padding: 40px;border-radius: 8px;box-shadow: 0 0 10px rgba(0,0,0,0.05);">
+    <div class="logo" style="text-align: center;font-size: 28px;font-weight: bold;color: #FFBF00;">CHECKMATE</div>
 
     <div class="content" style="margin-top: 30px;font-size: 16px;line-height: 1.6;">
         안녕하세요,<br><br>
-        <strong>YourApp</strong>에서 이메일 인증을 위해 아래의 인증 코드를 입력해 주세요.
+        <strong>CHECKMATE</strong>에서 이메일 인증을 위해 아래의 인증 코드를 입력해 주세요.
 
-        <div class="code-box" th:text="${code}" style="margin-top: 20px;padding: 15px;background-color: #f0f0f0;border-radius: 6px;font-size: 24px;font-weight: bold;text-align: center;letter-spacing: 2px;color: #333;">123456</div>
+        <div class="code-box" th:text="${code}"
+             style="margin-top: 20px;padding: 15px;background-color: #f0f0f0;border-radius: 6px;font-size: 24px;font-weight: bold;text-align: center;letter-spacing: 2px;color: #333;">
+            123456
+        </div>
 
         <br>인증 코드는 발송 후 10분간만 유효합니다.<br><br>
         본인이 요청하지 않은 경우, 이 메일은 무시하셔도 됩니다.
     </div>
 
     <div class="footer" style="margin-top: 40px;font-size: 13px;color: #888;text-align: center;">
-        © 2025 <span th:text="${appName}">YourApp</span>. All rights reserved.
+        © 2025 CHECKMATE. All rights reserved.
     </div>
 </div>
 </body>

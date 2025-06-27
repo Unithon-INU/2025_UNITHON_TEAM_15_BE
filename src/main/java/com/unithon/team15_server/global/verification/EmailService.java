@@ -98,7 +98,7 @@ public class EmailService {
         String code = createCode();
         MimeMessage message = javaMailSender.createMimeMessage();
         message.addRecipients(MimeMessage.RecipientType.TO, email);
-        message.setSubject("안녕하세요. 앱이름에서 보낸 인증번호입니다.");
+        message.setSubject("CHECKMATE에서 보낸 인증번호입니다.");
         message.setFrom(senderEmail);
         message.setText(setMailContext(code), "utf-8", "html");
 
