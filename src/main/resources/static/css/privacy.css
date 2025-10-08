@@ -1,0 +1,246 @@
+/* ---------------- 공통 폰트 ---------------- */
+@font-face {
+    font-family: 'Pretendard';
+    src: url('/fonts/Pretendard-Medium.woff2') format('woff2');
+    font-weight: 600;
+}
+@font-face {
+    font-family: 'Pretendard';
+    src: url('/fonts/Pretendard-Bold.woff2') format('woff2');
+    font-weight: 700;
+}
+
+/* 기본 스타일 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    line-height: 1.7;
+    color: #000;
+    background-color: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 컨테이너 */
+.container {
+    max-width: 100%;
+    margin: 0;
+    padding: 24px 20px;
+    background-color: #fff;
+}
+
+/* 메인 타이틀 */
+.main-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+/* 설명 문구 */
+.description {
+    font-size: 14px;
+    color: #000;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+/* 대제목 (1., 2., 3. 등) */
+.section-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #000;
+    margin-top: 28px;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+/* 중제목 (a., b., c. 등) */
+.subsection-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #000;
+    margin-top: 12px;
+    margin-bottom: 8px;
+    margin-left: 16px;
+    line-height: 1.5;
+}
+
+/* 일반 내용 */
+.content {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 12px;
+    margin-left: 16px;
+    line-height: 1.6;
+    word-break: keep-all;
+    word-wrap: break-word;
+}
+
+/* 강조 내용 */
+.emphasis {
+    font-size: 14px;
+    color: #000;
+    margin-bottom: 12px;
+    margin-left: 16px;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+/* 중요 경고 */
+.important {
+    font-size: 14px;
+    color: #d32f2f;
+    margin-bottom: 12px;
+    margin-left: 16px;
+    line-height: 1.6;
+    font-weight: 600;
+}
+
+/* 연락처 정보 */
+.contact-box {
+    margin: 16px 0 16px 16px;
+    padding: 12px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+}
+
+.contact-item {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 6px;
+    line-height: 1.5;
+}
+
+.contact-item:last-child {
+    margin-bottom: 0;
+}
+
+/* 시행일 */
+.effective-date {
+    font-size: 13px;
+    color: #666;
+    margin: 24px 0 12px 0;
+    text-align: right;
+}
+
+/* 구분선 */
+.divider {
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 24px 0;
+    border: none;
+}
+
+/* 섹션 간격 */
+.section {
+    margin-bottom: 20px;
+}
+
+/* 들여쓰기 레벨 */
+.indent-1 {
+    margin-left: 16px;
+}
+
+.indent-2 {
+    margin-left: 32px;
+}
+
+.indent-3 {
+    margin-left: 48px;
+}
+
+/* 모바일 최적화 */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px 16px;
+    }
+
+    .main-title {
+        font-size: 18px;
+    }
+
+    .section-title {
+        font-size: 14px;
+        margin-top: 24px;
+    }
+
+    .subsection-title {
+        font-size: 13px;
+        margin-left: 12px;
+    }
+
+    .content,
+    .emphasis,
+    .important {
+        font-size: 13px;
+        margin-left: 12px;
+    }
+
+    .contact-box {
+        margin-left: 12px;
+        padding: 10px;
+    }
+
+    .contact-item {
+        font-size: 13px;
+    }
+
+    .indent-1 {
+        margin-left: 12px;
+    }
+
+    .indent-2 {
+        margin-left: 24px;
+    }
+
+    .indent-3 {
+        margin-left: 36px;
+    }
+}
+
+/* 안드로이드 웹뷰 최적화 */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #121212;
+        color: #e0e0e0;
+    }
+
+    .container {
+        background-color: #121212;
+    }
+
+    .main-title,
+    .section-title,
+    .subsection-title,
+    .emphasis {
+        color: #ffffff;
+    }
+
+    .description,
+    .content,
+    .contact-item {
+        color: #b0b0b0;
+    }
+
+    .important {
+        color: #ff6b6b;
+    }
+
+    .contact-box {
+        background-color: #1e1e1e;
+    }
+
+    .effective-date {
+        color: #888;
+    }
+
+    .divider {
+        background-color: #333;
+    }
+}
