@@ -54,6 +54,7 @@ dependencies {
 	implementation('org.xhtmlrenderer:flying-saucer-pdf:9.1.22') {
 		exclude group: 'org.bouncycastle', module: 'bcprov-jdk14'
 	}
+
 }
 
 tasks.named('test') {
