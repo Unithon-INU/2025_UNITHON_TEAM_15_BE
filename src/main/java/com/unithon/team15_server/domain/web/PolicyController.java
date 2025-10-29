@@ -4,11 +4,11 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/policy")
-@Tag(name = "Policy", description = "정책 및 약관 API (토큰 X)")
+@Tag(name = "Policy", description = """
+        - 정책 및 약관 API (토큰 X) \n
+        - policy.checkmate.io.kr 서브도메인 사용하기""")
 public class PolicyController {
     @Operation(summary = "서비스 이용약관 조회")
     @GetMapping("/terms")
