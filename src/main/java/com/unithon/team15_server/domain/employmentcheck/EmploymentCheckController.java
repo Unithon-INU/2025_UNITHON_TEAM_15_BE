@@ -41,7 +41,7 @@ public class EmploymentCheckController {
     @Operation(summary = "입력한 step의 체크리스트 업데이트", description = "- 입력한 step의 제출 서류의 체크리스트 업데이트")
     @ApiResponse(responseCode = "200", description = "step의 체크리스트 업데이트 성공")
     @PatchMapping
-    public ResponseEntity<UpdateEmplCheckRes> patchEmploymentCheck(@AuthenticationPrincipal MemberDetail memberDetail, @RequestBody UpdateEmplCheckReq updateEmplCheckReq) {
+    public ResponseEntity<UpdateEmplCheckRes> patchEmploymentCheck(@AuthenticationPrincipal MemberDetail memberDetail, @RequestBody List<UpdateEmplCheckReq> updateEmplCheckReq) {
         return ResponseEntity.ok(employmentCheckService.updateEmploymentCheck(memberDetail.getId(), updateEmplCheckReq));
     }
 

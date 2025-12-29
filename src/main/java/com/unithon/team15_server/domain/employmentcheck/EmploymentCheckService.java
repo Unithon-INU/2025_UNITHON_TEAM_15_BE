@@ -138,17 +138,20 @@ public class EmploymentCheckService {
     }
 
     @Transactional
-    public UpdateEmplCheckRes updateEmploymentCheck(Long memberId, UpdateEmplCheckReq updateEmplCheckReq) {
+    public UpdateEmplCheckRes updateEmploymentCheck(Long memberId, List<UpdateEmplCheckReq> updateEmplCheckReq) {
 
         Member member = memberRepository.findById(memberId).orElseThrow(
                 () -> new CustomException(ErrorCode.USER_NOT_FOUND)
         );
-        member.updateCheckStep(updateEmplCheckReq.getCheckStep()); // 현재 업데이트 하는 곳 == 현재 회원이 진행하는 곳
 
-        EmploymentCheck employmentCheck = employmentCheckRepository.findByMemberIdAndCheckStepAndSubmissionIdx(memberId, updateEmplCheckReq.getCheckStep(), updateEmplCheckReq.getSubmissionIdx()).orElseThrow(
-                () -> new CustomException(ErrorCode.EMPLOY_CHECK_NOT_FOUND)
-        );
-        employmentCheck.toggleIsChecked();
+        updateEmplCheckReq.forEach(check -> {
+            member.updateCheckStep(check.getCheckStep()); // 현재 업데이트 하는 곳 == 현재 회원이 진행하는 곳
+
+            EmploymentCheck employmentCheck = employmentCheckRepository.findByMemberIdAndCheckStepAndSubmissionIdx(memberId, check.getCheckStep(), check.getSubmissionIdx()).orElseThrow(
+                    () -> new CustomException(ErrorCode.EMPLOY_CHECK_NOT_FOUND)
+            );
+            employmentCheck.toggleIsChecked(); //체크리스트 상태 변경
+        });
 
         return new UpdateEmplCheckRes(calculateProgress(memberId));
     }
