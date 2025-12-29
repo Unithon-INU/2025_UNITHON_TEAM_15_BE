@@ -171,6 +171,11 @@ public class EmploymentCheckService {
         createEmploymentCheck(memberId);
     }
 
+    @Transactional
+    public void hardDeleteEmploymentCheck(Long memberId) {
+        employmentCheckRepository.deleteAllByMemberId(memberId);
+    }
+
     private Locale getCurrentLocale() {
         return LocaleContextHolder.getLocale();
     }

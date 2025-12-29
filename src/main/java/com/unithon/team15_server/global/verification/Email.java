@@ -1,9 +1,6 @@
 package com.unithon.team15_server.global.verification;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 @Entity
 @NoArgsConstructor
+@Table(name = "email_tb")
 public class Email {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
