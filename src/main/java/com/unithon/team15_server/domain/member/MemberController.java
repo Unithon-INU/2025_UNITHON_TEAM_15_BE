@@ -69,4 +69,12 @@ public class MemberController {
     public ResponseEntity<MemberProfileGetRes> getMemberProfile(@AuthenticationPrincipal MemberDetail memberDetail) {
         return ResponseEntity.ok(memberService.getMemberProfile(memberDetail.getId()));
     }
+
+    @Operation(summary = "[테스트용] 회원 탈퇴", description = "- hard delete 방식으로 회원의 정보 모두 한번에 삭제")
+    @ApiResponse(responseCode = "204", description = "회원 탈퇴 성공")
+    @DeleteMapping
+    public ResponseEntity<Void> deleteMember(@AuthenticationPrincipal MemberDetail memberDetail) {
+        memberService.hardDeleteMember(memberDetail.getId());
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

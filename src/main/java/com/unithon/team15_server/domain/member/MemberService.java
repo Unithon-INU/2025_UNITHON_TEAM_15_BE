@@ -73,6 +73,12 @@ public class MemberService {
         return memberRepository.findMemberProfileById(memberId);
     }
 
+    @Transactional
+    public void hardDeleteMember(Long memberId) {
+        employmentCheckService.hardDeleteEmploymentCheck(memberId);
+        memberRepository.deleteById(memberId);
+    }
+
     private String getToken(String email) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email, null);
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
