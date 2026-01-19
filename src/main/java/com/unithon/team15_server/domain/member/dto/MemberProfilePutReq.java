@@ -5,11 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 
 @Getter
-public class MemberProfileSetReq {
-
-    @NotBlank
-    @Schema(description = "설정한 언어", example = "English")
-    private String language;
+public class MemberProfilePutReq {
 
     @NotBlank
     @Schema(description = "비자 종류", example = "D-2")
@@ -20,6 +16,6 @@ public class MemberProfileSetReq {
     private String topikLevel;
 
     @NotBlank
-    @Schema(description = "업종", example = "음식점/카페,편의점/마트")
+    @Schema(description = "업종 (쉼표로 구분)", example = "음식점/카페,편의점/마트")
     private String industry;
 }

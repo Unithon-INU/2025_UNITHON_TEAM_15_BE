@@ -74,6 +74,14 @@ public class MemberService {
     }
 
     @Transactional
+    public void updateProfile(Long memberId, MemberProfilePutReq memberProfilePutReq) {
+        Member member = memberRepository.findById(memberId).orElseThrow(
+                () -> new CustomException(ErrorCode.USER_NOT_FOUND)
+        );
+        member.updateProfile(member.getLanguage(), memberProfilePutReq.getTopikLevel(), memberProfilePutReq.getVisaType(), memberProfilePutReq.getIndustry());
+    }
+
+    @Transactional
     public void hardDeleteMember(Long memberId) {
         employmentCheckService.hardDeleteEmploymentCheck(memberId);
         memberRepository.deleteById(memberId);
