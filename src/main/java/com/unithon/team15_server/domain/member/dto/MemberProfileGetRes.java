@@ -22,6 +22,6 @@ public class MemberProfileGetRes {
     private String topikLevel;
 
     @NotBlank
-    @Schema(description = "업종 (쉼표로 구분해주세요.)", example = "음식점/카페,편의점/마트")
+    @Schema(description = "업종 (쉼표로 구분)", example = "음식점/카페,편의점/마트")
     private String industry;
 }
