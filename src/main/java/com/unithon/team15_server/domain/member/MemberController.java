@@ -43,7 +43,7 @@ public class MemberController {
 
     @Operation(summary = "회원 정보 설정", description = "- 회원의 정보를 받습니다. (언어 ~ 업무 직종)\n" +
             "- topikLevel값은 디자인 그대로 넣어주세요. (없음, TOPIK 3급, TOPIK 4급 이상) \n")
-    @ApiResponse(responseCode = "200", description = "회원 정보 설정 성공 (respones == 토큰)")
+    @ApiResponse(responseCode = "200", description = "회원 정보 설정 성공 (respones: 토큰)")
     @PostMapping("/me/profile")
     public ResponseEntity<Map<String, String>> registerProfile(@AuthenticationPrincipal MemberDetail memberDetail, @RequestBody MemberProfileSetReq memberProfileSetReq) {
         String token = memberService.registerProfile(memberDetail.getId(), memberProfileSetReq);
@@ -69,6 +69,15 @@ public class MemberController {
     public ResponseEntity<MemberProfileGetRes> getMemberProfile(@AuthenticationPrincipal MemberDetail memberDetail) {
         return ResponseEntity.ok(memberService.getMemberProfile(memberDetail.getId()));
     }
+
+    @Operation(summary = "회원의 온보딩 정보 수정", description = "- 비자 종류, Topik 종류, 희망 업종 변경")
+    @ApiResponse(responseCode = "204", description = "회원 온보딩 정보 수정 성공")
+    @PutMapping("/me/profile")
+    public ResponseEntity<Void> putMemberProfile(@AuthenticationPrincipal MemberDetail memberDetail, @RequestBody MemberProfilePutReq memberProfilePutReq) {
+        memberService.updateProfile(memberDetail.getId(), memberProfilePutReq);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 
     @Operation(summary = "[테스트용] 회원 탈퇴", description = "- hard delete 방식으로 회원의 정보 모두 한번에 삭제")
     @ApiResponse(responseCode = "204", description = "회원 탈퇴 성공")
