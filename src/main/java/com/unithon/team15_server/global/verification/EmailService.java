@@ -16,6 +16,7 @@ import org.thymeleaf.context.Context;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
+import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Random;
@@ -41,7 +42,7 @@ public class EmailService {
         Email email = emailRepository.findEmailByEmail(emailVerifyCodeReq.getEmail()).orElseThrow(
                 () -> new CustomException(ErrorCode.USER_NOT_FOUND)
         );
-        if(email.getExpiredAt().isBefore(LocalDateTime.now())) { //유효기간 만료
+        if (email.getExpiredAt().isBefore(LocalDateTime.now())) { //유효기간 만료
             emailRepository.delete(email);
             throw new CustomException(ErrorCode.EXPIRED_CODE);
         }
@@ -51,28 +52,11 @@ public class EmailService {
     }
 
     private String createCode() {
-        Random random = new Random();
+        Random random = new SecureRandom();
         StringBuilder key = new StringBuilder();
 
-        for (int i = 0; i < 8; i++) { // 총 8자리 인증 번호 생성
-            int idx = random.nextInt(3); // 0~2 사이의 값을 랜덤하게 받아와 idx에 집어넣습니다
-
-            // 0,1,2 값을 switchcase를 통해 꼬아버립니다.
-            // 숫자와 ASCII 코드를 이용합니다.
-            switch (idx) {
-                case 0:
-                    // 0일 때, a~z 까지 랜덤 생성 후 key에 추가
-                    key.append((char) (random.nextInt(26) + 97));
-                    break;
-                case 1:
-                    // 1일 때, A~Z 까지 랜덤 생성 후 key에 추가
-                    key.append((char) (random.nextInt(26) + 65));
-                    break;
-                case 2:
-                    // 2일 때, 0~9 까지 랜덤 생성 후 key에 추가
-                    key.append(random.nextInt(9));
-                    break;
-            }
+        for (int i = 0; i < 6; i++) { // 총 6자리 인증 번호 생성
+            key.append(random.nextInt(10));
         }
         return key.toString();
     }
