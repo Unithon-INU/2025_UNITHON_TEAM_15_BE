@@ -12,8 +12,8 @@ public class MemberProfilePutReq {
     private String visaType;
 
     @NotBlank
-    @Schema(description = "한국어 능력", example = "TOPIK 3급")
-    private String topikLevel;
+    @Schema(description = "언어 능력", example = "TOPIK 3급")
+    private String languageLevel;
 
     @NotBlank
     @Schema(description = "업종 (쉼표로 구분)", example = "음식점/카페,편의점/마트")

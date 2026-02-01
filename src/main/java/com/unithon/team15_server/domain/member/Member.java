@@ -26,7 +26,7 @@ public class Member {
 
     private String language;
 
-    private String topikLevel;
+    private String languageLevel;
 
     private String visaType;
 
@@ -39,12 +39,12 @@ public class Member {
     private CheckStep checkStep;
 
     @Builder
-    private Member(String nickname, String email, String password, String language, String topikLevel, String visaType, String industry, MemberRole memberRole, CheckStep checkStep) {
+    private Member(String nickname, String email, String password, String language, String languageLevel, String visaType, String industry, MemberRole memberRole, CheckStep checkStep) {
         this.nickname = nickname;
         this.email = email;
         this.password = password;
         this.language = language;
-        this.topikLevel = topikLevel;
+        this.languageLevel = languageLevel;
         this.visaType = visaType;
         this.industry = industry;
         this.memberRole = memberRole;
@@ -57,7 +57,7 @@ public class Member {
                 .email(memberSignupReq.getEmail())
                 .password(passwordProcessor.encode(memberSignupReq.getPassword()))
                 .language("")
-                .topikLevel("")
+                .languageLevel("")
                 .visaType("")
                 .industry("")
                 .memberRole(MemberRole.GUEST)
@@ -73,9 +73,9 @@ public class Member {
         this.memberRole = memberRole;
     }
 
-    public void updateProfile(String language, String topikLevel, String visaType, String industry) {
+    public void updateProfile(String language, String languageLevel, String visaType, String industry) {
         this.language = language;
-        this.topikLevel = topikLevel;
+        this.languageLevel = languageLevel;
         this.visaType = visaType;
         this.industry = industry;
     }
