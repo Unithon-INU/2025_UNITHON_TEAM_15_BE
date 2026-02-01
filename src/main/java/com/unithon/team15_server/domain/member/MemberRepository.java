@@ -18,8 +18,8 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query("""
             SELECT new com.unithon.team15_server.domain.member.dto.MemberProfileGetRes(
                 m.language,
-                m.languageLevel,
                 m.visaType,
+                m.languageLevel,
                 m.industry
             )
             FROM Member m

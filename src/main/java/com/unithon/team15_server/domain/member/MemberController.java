@@ -1,6 +1,7 @@
 package com.unithon.team15_server.domain.member;
 
 import com.unithon.team15_server.domain.member.dto.*;
+import com.unithon.team15_server.domain.member.enums.ProfileField;
 import com.unithon.team15_server.global.jwt.MemberDetail;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -70,11 +71,12 @@ public class MemberController {
         return ResponseEntity.ok(memberService.getMemberProfile(memberDetail.getId()));
     }
 
-    @Operation(summary = "회원의 온보딩 정보 수정", description = "- 비자 종류, Topik 종류, 희망 업종 변경")
-    @ApiResponse(responseCode = "204", description = "회원 온보딩 정보 수정 성공")
-    @PutMapping("/me/profile")
-    public ResponseEntity<Void> putMemberProfile(@AuthenticationPrincipal MemberDetail memberDetail, @RequestBody MemberProfilePutReq memberProfilePutReq) {
-        memberService.updateProfile(memberDetail.getId(), memberProfilePutReq);
+    @Operation(summary = "회원의 온보딩 특정 정보 수정", description = "- 비자 종류, Topik 종류, 희망 업종 중 바꾸고 싶은 필드명을 URL 변수에 추가해 변경" +
+            "- 희망 업종은 쉼표로 구분해 수정 (ex. 음식점/카페,편의점/마트)")
+    @ApiResponse(responseCode = "204", description = "회원 온보딩 특정 정보 수정 성공")
+    @PatchMapping("/me/profile/{profileField}")
+    public ResponseEntity<Void> patchMemberProfileField(@AuthenticationPrincipal MemberDetail memberDetail, @PathVariable ProfileField profileField, @RequestBody MemberProfilePatchReq memberProfilePatchReq) {
+        memberService.updateProfileField(memberDetail.getId(), profileField, memberProfilePatchReq);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

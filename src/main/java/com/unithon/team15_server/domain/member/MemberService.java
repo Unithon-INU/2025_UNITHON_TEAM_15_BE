@@ -3,6 +3,7 @@ package com.unithon.team15_server.domain.member;
 import com.unithon.team15_server.domain.employmentcheck.EmploymentCheckService;
 import com.unithon.team15_server.domain.member.dto.*;
 import com.unithon.team15_server.domain.member.enums.MemberRole;
+import com.unithon.team15_server.domain.member.enums.ProfileField;
 import com.unithon.team15_server.global.exception.CustomException;
 import com.unithon.team15_server.global.exception.ErrorCode;
 import com.unithon.team15_server.global.jwt.JwtProvider;
@@ -51,7 +52,7 @@ public class MemberService {
         Member member = memberRepository.findById(memberId).orElseThrow(
                 () -> new CustomException(ErrorCode.USER_NOT_FOUND)
         );
-        member.updateProfile(memberProfileSetReq.getLanguage(), memberProfileSetReq.getTopikLevel(), memberProfileSetReq.getVisaType(), memberProfileSetReq.getIndustry());
+        member.updateProfile(memberProfileSetReq.getLanguage(), memberProfileSetReq.getLanguageLevel(), memberProfileSetReq.getVisaType(), memberProfileSetReq.getIndustry());
         member.updateMemberRole(MemberRole.USER);
         employmentCheckService.createEmploymentCheck(memberId); //회원가입 성공시 해당 회원에 대한 checklist 전체 생성
         return getToken(member.getEmail());
@@ -74,11 +75,16 @@ public class MemberService {
     }
 
     @Transactional
-    public void updateProfile(Long memberId, MemberProfilePutReq memberProfilePutReq) {
+    public void updateProfileField(Long memberId, ProfileField profileField, MemberProfilePatchReq memberProfilePatchReq) {
         Member member = memberRepository.findById(memberId).orElseThrow(
                 () -> new CustomException(ErrorCode.USER_NOT_FOUND)
         );
-        member.updateProfile(member.getLanguage(), memberProfilePutReq.getTopikLevel(), memberProfilePutReq.getVisaType(), memberProfilePutReq.getIndustry());
+
+        switch (profileField) {
+            case VISA_TYPE -> member.updateVisa(memberProfilePatchReq.getValue());
+            case LANGUAGE_LEVEL -> member.updateLanguageLevel(memberProfilePatchReq.getValue());
+            case INDUSTRY -> member.updateIndustry(memberProfilePatchReq.getValue());
+        }
     }
 
     @Transactional

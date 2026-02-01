@@ -24,12 +24,16 @@ public class Member {
 
     private String password;
 
+    //한국어, English
     private String language;
 
+    //Topik 4급, IELTS 5.5..
     private String languageLevel;
 
+    //D-2, D-4
     private String visaType;
 
+    //음식점, 카페..
     private String industry;
 
     @Enumerated(EnumType.STRING)
@@ -77,6 +81,18 @@ public class Member {
         this.language = language;
         this.languageLevel = languageLevel;
         this.visaType = visaType;
+        this.industry = industry;
+    }
+
+    public void updateVisa(String visaType) {
+        this.visaType = visaType;
+    }
+
+    public void updateLanguageLevel(String languageLevel) {
+        this.languageLevel = languageLevel;
+    }
+
+    public void updateIndustry(String industry) {
         this.industry = industry;
     }
 
