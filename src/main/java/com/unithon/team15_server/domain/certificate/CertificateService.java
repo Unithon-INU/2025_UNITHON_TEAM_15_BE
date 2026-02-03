@@ -112,10 +112,11 @@ public class CertificateService {
                             }
                         }
                     }
+                    default -> throw new IllegalArgumentException("지원하지 않는 언어 능력 타입: " + languageLevel);
                 }
             }
+            default -> throw new IllegalArgumentException("지원하지 않는 비자 타입: " + visaType);
         }
-
         return workingTimeLimit;
     }
 
