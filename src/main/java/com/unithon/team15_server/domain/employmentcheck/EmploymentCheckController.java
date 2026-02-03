@@ -19,11 +19,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/employment")
 @RequiredArgsConstructor
-@Tag(name = "Employmenr Check", description = "시간제취업확인")
+@Tag(name = "Employment Check", description = "시간제취업 체크리스트 현황 및 관리 API")
 public class EmploymentCheckController {
     private final EmploymentCheckService employmentCheckService;
 
-    @Operation(summary = "내 시간제취업 정보 전체 조회", description = "- 모든 step에 대한 체크리스트 정보를 전달\n" +
+    @Operation(summary = "내 시간제취업 체크리스트 조회", description = "- 모든 step에 대한 체크리스트 정보를 전달\n" +
             "- step의 정보와 유의사항 전달\n")
     @ApiResponse(responseCode = "200", description = "내 시간제취업 정보 전체 조회 성공")
     @GetMapping("/home")

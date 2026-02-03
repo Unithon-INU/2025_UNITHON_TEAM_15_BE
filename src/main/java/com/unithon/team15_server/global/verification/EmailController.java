@@ -4,6 +4,7 @@ import com.unithon.team15_server.global.verification.dto.EmailSendReq;
 import com.unithon.team15_server.global.verification.dto.EmailVerifyCodeReq;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/email")
 @RequiredArgsConstructor
+@Tag(name = "Email", description = "인증 이메일 API")
 public class EmailController {
     private final EmailService emailService;
 
