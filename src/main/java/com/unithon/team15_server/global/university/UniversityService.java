@@ -35,7 +35,7 @@ public class UniversityService {
         List<UniversityMajorRes> universityMajorResList = majorList.stream().filter(item -> !"폐과".equals(item.getScsbjtSttsNm())).collect(Collectors.toMap(
                 UniversityApiMajorItem::getScsbjtNm,
                 item -> UniversityMajorRes.builder()
-                        .majorName(item.getScsbjtNm())
+                        .major(item.getScsbjtNm())
                         .lssnTerm(item.getLssnTerm())
                         .build(),
                 (existing, replacement) -> existing // 학과 중복 방지를 위해 map 사용

@@ -9,7 +9,7 @@ import lombok.Getter;
 public class UniversityMajorRes {
 
     @Schema(description = "학과명", example = "컴퓨터공학부")
-    private final String majorName;
+    private final String major;
 
     @Schema(description = "학위과정", example = "4학년")
     private final String lssnTerm;
