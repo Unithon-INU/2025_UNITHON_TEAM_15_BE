@@ -2,8 +2,16 @@ package com.unithon.team15_server.domain.certificate;
 
 import com.lowagie.text.DocumentException;
 import com.unithon.team15_server.domain.certificate.dto.CertificateReq;
+import com.unithon.team15_server.domain.certificate.dto.WorkingTimeLimitReq;
+import com.unithon.team15_server.domain.certificate.dto.WorkingTimeLimitRes;
+import com.unithon.team15_server.domain.certificate.enums.UniversityYear;
+import com.unithon.team15_server.domain.certificate.enums.WorkingTimeLimit;
 import com.unithon.team15_server.domain.certificate.implement.EmailSender;
 import com.unithon.team15_server.domain.certificate.implement.PdfGenerator;
+import com.unithon.team15_server.domain.member.Member;
+import com.unithon.team15_server.domain.member.MemberRepository;
+import com.unithon.team15_server.global.exception.CustomException;
+import com.unithon.team15_server.global.exception.ErrorCode;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,9 +23,103 @@ import java.io.IOException;
 public class CertificateService {
     private final PdfGenerator pdfGenerator;
     private final EmailSender emailSender;
+    private final MemberRepository memberRepository;
 
     public void sendCert(CertificateReq certificateReq) throws DocumentException, IOException, MessagingException {
         String pdf = pdfGenerator.parseHtmlToString(certificateReq);
         emailSender.snedEmail(certificateReq.getEmail(), pdfGenerator.generatePdf(pdf));
+    }
+
+    public WorkingTimeLimitRes getWorkingTimeLimit(Long memberId, WorkingTimeLimitReq workingTimeLimitReq) {
+        Member member = memberRepository.findById(memberId).orElseThrow(
+                () -> new CustomException(ErrorCode.USER_NOT_FOUND)
+        );
+        //TODO 인증대학 체크하기
+        WorkingTimeLimit workingTimeLimit = calculateWorkingTime(member.getVisaType(), member.getLanguageLevel(), workingTimeLimitReq.getYear(), true);
+
+        return WorkingTimeLimitRes.builder()
+                .weeklyHours(workingTimeLimit.getWeeklyHours())
+                .weekdayHours(workingTimeLimit.getWeekdayHours())
+                .weekendHours(workingTimeLimit.getWeekendHours())
+                .build();
+    }
+
+    private WorkingTimeLimit calculateWorkingTime(String visaType, String languageLevel, UniversityYear universityYear, boolean isCertifiedUniversity) {
+        WorkingTimeLimit workingTimeLimit = null;
+
+        switch (visaType) {
+            case "D-4" -> {
+                if (languageLevel.contains("없음")) {
+                    workingTimeLimit = WorkingTimeLimit.D4_NO_TOPIK;
+                    // 주말 + 주중 10시간
+                } else {
+                    if (isCertifiedUniversity) { //인증대학
+                        workingTimeLimit = WorkingTimeLimit.D4_CERTIFIED_TOPIK;
+                        // 주중 25, 주말및방학 무제한
+                    } else {
+                        workingTimeLimit = WorkingTimeLimit.D4_TOPIK_2;
+                        // 주중 20, 주말및방학 무제한
+                    }
+                }
+            }
+
+            case "D-2" -> {
+                switch (universityYear) {
+                    case ASSOCIATE -> {
+                        if (languageLevel.contains("없음")) {
+                            workingTimeLimit = WorkingTimeLimit.D2_ASSOCIATE_NO_TOPIK;
+                        } else {
+                            if (isCertifiedUniversity) { //인증대학
+                                workingTimeLimit = WorkingTimeLimit.D2_ASSOCIATE_CERTIFIED_TOPIK;
+                            } else { //토픽만
+                                workingTimeLimit = WorkingTimeLimit.D2_ASSOCIATE_TOPIK_3;
+                            }
+                        }
+                    }
+
+                    case BACHELOR_1, BACHELOR_2 -> {
+                        if (languageLevel.contains("없음")) {
+                            workingTimeLimit = WorkingTimeLimit.D2_BACHELOR_12_NO_TOPIK;
+                        } else {
+                            if (isCertifiedUniversity) { //인증대학
+                                workingTimeLimit = WorkingTimeLimit.D2_BACHELOR_12_CERTIFIED_TOPIK;
+                            } else { //토픽만
+                                workingTimeLimit = WorkingTimeLimit.D2_BACHELOR_12_TOPIK_3;
+                            }
+                        }
+                    }
+
+                    case BACHELOR_3, BACHELOR_4 -> {
+                        if (languageLevel.contains("없음")) {
+                            workingTimeLimit = WorkingTimeLimit.D2_BACHELOR_34_NO_TOPIK;
+                        } else {
+                            if (isCertifiedUniversity) { //인증대학
+                                workingTimeLimit = WorkingTimeLimit.D2_BACHELOR_34_CERTIFIED_TOPIK;
+                            } else { //토픽만
+                                workingTimeLimit = WorkingTimeLimit.D2_BACHELOR_34_TOPIK_4;
+                            }
+                        }
+                    }
+
+                    case GRADUATE -> {
+                        if (languageLevel.contains("없음")) {
+                            workingTimeLimit = WorkingTimeLimit.D2_GRADUATE_NO_TOPIK;
+                        } else {
+                            if (isCertifiedUniversity) { //인증대학
+                                workingTimeLimit = WorkingTimeLimit.D2_GRADUATE_CERTIFIED_TOPIK;
+                            } else { //토픽만
+                                workingTimeLimit = WorkingTimeLimit.D2_GRADUATE_TOPIK_4;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return workingTimeLimit;
+    }
+
+    private void isCertifiedUniversity(String university) {
+
     }
 }
