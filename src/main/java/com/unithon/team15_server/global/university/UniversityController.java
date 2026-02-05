@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/university")
 @RequiredArgsConstructor
@@ -21,7 +23,7 @@ public class UniversityController {
     @Operation(summary = "대학교 정보 조회")
     @ApiResponse(responseCode = "200", description = "대학교 및 학과 리스트 조회")
     @GetMapping
-    public ResponseEntity<UniversityRes> getUniversityMajors(@RequestParam String universityName) {
+    public ResponseEntity<List<UniversityRes>> getUniversityMajors(@RequestParam String universityName) {
         return ResponseEntity.ok(universityService.getUniversityMajors(universityName));
     }
 }

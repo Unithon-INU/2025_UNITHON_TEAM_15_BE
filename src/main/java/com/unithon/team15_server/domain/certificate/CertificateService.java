@@ -40,7 +40,6 @@ public class CertificateService {
         return WorkingTimeLimitRes.builder()
                 .weeklyHours(workingTimeLimit.getWeeklyHours())
                 .weekdayHours(workingTimeLimit.getWeekdayHours())
-                .weekendHours(workingTimeLimit.getWeekendHours())
                 .build();
     }
 

@@ -34,7 +34,7 @@ public class CertificateController {
 
     @Operation(summary = "시간제취업 근무 가능 시간 조회", description = "－ 시간제취업 근무 가능 시간 정보 조회\n" +
             "- weeklyHours가 null인 경우, 주중/주말 근무 시간이 각각 다르게 적용\n" +
-            "- weekendHours가 null인 경우, 주말 및 방학 기간에는 근무 시간 제한이 없음")
+            "- weeklyHours가 null이 아닐 경우, 주중 + 주말인 시간\n")
     @ApiResponse(responseCode = "200", description = "근무 가능 시간 조회 성공")
     @GetMapping("/working-time")
     public ResponseEntity<WorkingTimeLimitRes> getWorkingTimeLimit(@AuthenticationPrincipal MemberDetail memberDetail, @ModelAttribute WorkingTimeLimitReq workingTimeLimitReq) {

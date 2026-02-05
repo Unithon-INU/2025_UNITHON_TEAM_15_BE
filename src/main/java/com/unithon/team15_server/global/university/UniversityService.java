@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,11 +24,13 @@ public class UniversityService {
     private final String PAGE_NO = "1";
     private final String NUM_OF_ROWS = "1000";
 
-    public UniversityRes getUniversityMajors(String universityName) {
+    public List<UniversityRes> getUniversityMajors(String universityName) {
         return searchUniversityMajors(serviceKey, PAGE_NO, NUM_OF_ROWS, TYPE, universityName);
     }
 
-    private UniversityRes searchUniversityMajors(String serviceKey, String pageNo, String numOfRows, String type, String university) {
+    private List<UniversityRes> searchUniversityMajors(String serviceKey, String pageNo, String numOfRows, String type, String university) {
+        List<UniversityRes> universityResList = new ArrayList<>();
+
         UniversityApiWrapper universityApiResponse = universityClient.getUniversityMajors(serviceKey, pageNo, numOfRows, type, university);
         List<UniversityApiMajorItem> majorList = universityApiResponse.getUniversityApiResponse().getBody().getItems().isEmpty() ? null : universityApiResponse.getUniversityApiResponse().getBody().getItems();
 
@@ -41,9 +44,11 @@ public class UniversityService {
                 (existing, replacement) -> existing // 학과 중복 방지를 위해 map 사용
         )).values().stream().toList();
 
-        return UniversityRes.builder()
+        universityResList.add(UniversityRes.builder()
                 .university(universityName)
                 .majors(universityMajorResList)
-                .build();
+                .build());
+
+        return universityResList;
     }
 }
