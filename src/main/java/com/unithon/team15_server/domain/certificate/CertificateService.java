@@ -12,6 +12,8 @@ import com.unithon.team15_server.domain.member.Member;
 import com.unithon.team15_server.domain.member.MemberRepository;
 import com.unithon.team15_server.global.exception.CustomException;
 import com.unithon.team15_server.global.exception.ErrorCode;
+import com.unithon.team15_server.global.university.AccreditedUniversityRepository;
+import com.unithon.team15_server.global.university.enums.ProgramType;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,7 @@ public class CertificateService {
     private final PdfGenerator pdfGenerator;
     private final EmailSender emailSender;
     private final MemberRepository memberRepository;
+    private final AccreditedUniversityRepository accreditedUniversityRepository;
 
     public void sendCert(CertificateReq certificateReq) throws DocumentException, IOException, MessagingException {
         String pdf = pdfGenerator.parseHtmlToString(certificateReq);
@@ -34,8 +37,8 @@ public class CertificateService {
         Member member = memberRepository.findById(memberId).orElseThrow(
                 () -> new CustomException(ErrorCode.USER_NOT_FOUND)
         );
-        //TODO 인증대학 체크하기
-        WorkingTimeLimit workingTimeLimit = calculateWorkingTime(member.getVisaType(), member.getLanguageLevel(), workingTimeLimitReq.getYear(), true);
+
+        WorkingTimeLimit workingTimeLimit = calculateWorkingTime(member.getVisaType(), member.getLanguageLevel(), workingTimeLimitReq.getYear(), isAccreditedUniversity(workingTimeLimitReq.getUniversity(), member.getVisaType()));
 
         return WorkingTimeLimitRes.builder()
                 .weeklyHours(workingTimeLimit.getWeeklyHours())
@@ -119,7 +122,17 @@ public class CertificateService {
         return workingTimeLimit;
     }
 
-    private void isCertifiedUniversity(String university) {
-
+    private boolean isAccreditedUniversity(String universityName, String visaType) {
+        // 인증대학 여부 확인
+        // true -> 인증대 O, false -> 인증대 X
+        switch (visaType) {
+            case "D-2" -> {
+                return accreditedUniversityRepository.existsByNameAndProgramType(universityName, ProgramType.DEGREE);
+            }
+            case "D-4" -> {
+                return accreditedUniversityRepository.existsByNameAndProgramType(universityName, ProgramType.LANGUAGE);
+            }
+            default -> throw new CustomException(ErrorCode.INVALID_AUTH_CODE);
+        }
     }
 }
