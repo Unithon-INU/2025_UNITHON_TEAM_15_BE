@@ -1,4 +1,4 @@
-package com.unithon.team15_server.global.university;
+package com.unithon.team15_server.global.university.entity;
 
 import com.unithon.team15_server.global.university.enums.ProgramType;
 import com.unithon.team15_server.global.university.enums.UniversityType;

@@ -12,7 +12,7 @@ import com.unithon.team15_server.domain.member.Member;
 import com.unithon.team15_server.domain.member.MemberRepository;
 import com.unithon.team15_server.global.exception.CustomException;
 import com.unithon.team15_server.global.exception.ErrorCode;
-import com.unithon.team15_server.global.university.AccreditedUniversityRepository;
+import com.unithon.team15_server.global.university.repository.AccreditedUniversityRepository;
 import com.unithon.team15_server.global.university.enums.ProgramType;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;

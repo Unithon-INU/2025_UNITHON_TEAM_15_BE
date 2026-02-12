@@ -6,11 +6,11 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class UniversityMajorRes {
+public class UniversityMajorsRes {
 
     @Schema(description = "학과명", example = "컴퓨터공학부")
     private final String major;
 
-    @Schema(description = "학위과정", example = "4학년")
-    private final String lssnTerm;
+    @Schema(description = "수업연한", example = "4년")
+    private final String studyPeriod;
 }
