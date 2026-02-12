@@ -44,10 +44,10 @@ public class EmailService {
         );
         if (email.getExpiredAt().isBefore(LocalDateTime.now())) { //유효기간 만료
             emailRepository.delete(email);
-            throw new CustomException(ErrorCode.EXPIRED_CODE);
+            throw new CustomException(ErrorCode.EXPIRED_AUTH_CODE);
         }
         if (!email.getCode().equals(emailVerifyCodeReq.getCode())) { //코드 유효 X
-            throw new CustomException(ErrorCode.INVALID_CODE);
+            throw new CustomException(ErrorCode.INVALID_AUTH_CODE);
         }
     }
 
