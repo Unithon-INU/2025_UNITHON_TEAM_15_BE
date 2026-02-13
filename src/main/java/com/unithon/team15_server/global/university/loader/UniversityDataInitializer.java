@@ -39,6 +39,7 @@ public class UniversityDataInitializer implements CommandLineRunner {
 
         var entities = wrapper.getRecords().stream()
                 .filter(record -> !"폐과".equals(record.getMajorStatus()))
+                .filter(record -> record.getMajor() == null || !record.getMajor().contains("기타"))
                 .map(record -> University.builder()
                         .university(record.getUniversity())
                         .universityType(universityTypeConverter.convert(record.getUniversityType()))
