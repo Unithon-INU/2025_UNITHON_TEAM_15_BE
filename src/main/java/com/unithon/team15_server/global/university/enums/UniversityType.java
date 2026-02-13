@@ -7,9 +7,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum UniversityType {
 
-    ASSOCIATE("전문대"),
-    BACHELOR("학사"),
-    GRADUATE("석박사");
+    BACHELOR("학사", 1),
+    GRADUATE("석박사",2),
+    ASSOCIATE("전문대",3);
 
     private final String description;
+    private final int order;
 }

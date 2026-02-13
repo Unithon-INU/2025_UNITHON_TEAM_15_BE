@@ -42,6 +42,7 @@ public class SecurityConfig {
                         .requestMatchers("/css/**", "/js/**", "/fonts/**").permitAll()
                         .requestMatchers("/privacy", "/terms").permitAll()
                         .requestMatchers("/actuator/**").permitAll()
+                        .requestMatchers("/api/universities").permitAll()
                         .anyRequest().authenticated())
 
                 .sessionManagement(session -> session

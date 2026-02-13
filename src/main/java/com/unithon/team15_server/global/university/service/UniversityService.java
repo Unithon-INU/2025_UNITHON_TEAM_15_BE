@@ -7,6 +7,7 @@ import com.unithon.team15_server.global.university.repository.UniversityReposito
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,6 +38,9 @@ public class UniversityService {
                                     .toList())
                             .build();
                 })
+                .sorted(Comparator
+                        .comparing(UniversityRes::getUniversityType)
+                        .thenComparing(UniversityRes::getUniversity))
                 .toList();
     }
 }
