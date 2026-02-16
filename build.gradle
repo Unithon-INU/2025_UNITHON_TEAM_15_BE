@@ -54,6 +54,12 @@ dependencies {
     // OpenFeign
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
+    //DeepL (번역 api)
+    implementation "com.deepl.api:deepl-java:1.14.0"
+
+    //Redis
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
     implementation('org.xhtmlrenderer:flying-saucer-pdf:9.1.22') {
         exclude group: 'org.bouncycastle', module: 'bcprov-jdk14'
     }
