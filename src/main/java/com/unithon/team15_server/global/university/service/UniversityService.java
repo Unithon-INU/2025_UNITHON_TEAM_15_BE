@@ -31,6 +31,7 @@ public class UniversityService {
             university = translator.translateToKorean(university);
         }
 
+        university = university.replaceAll("\\s+", "");
 
         List<University> results = universityRepository
                 .findByUniversityContaining(university);
