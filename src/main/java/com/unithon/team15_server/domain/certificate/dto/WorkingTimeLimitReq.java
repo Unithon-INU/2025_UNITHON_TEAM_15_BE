@@ -9,12 +9,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class WorkingTimeLimitReq {
 
-    @Schema(description = "대학교명", example = "인천대학교")
-    private final String university;
-
-    @Schema(description = "학과명", example = "컴퓨터공학부")
-    private final String major;
-
     @Schema(description = "학년", example = "BACHELOR_2")
     private final UniversityYear year;
+
+    @Schema(description = "인증대 여부", example = "true")
+    private final Boolean isAccredited;
 }
