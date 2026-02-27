@@ -3,11 +3,12 @@ package com.unithon.team15_server.global.university.implement;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.unithon.team15_server.global.exception.CustomException;
 import com.unithon.team15_server.global.exception.ErrorCode;
-import com.unithon.team15_server.global.university.entity.AccreditedUniversity;
-import com.unithon.team15_server.global.university.repository.AccreditedUniversityRepository;
 import com.unithon.team15_server.global.university.dto.AccreditedUniversityDto;
+import com.unithon.team15_server.global.university.dto.AccreditedUniversityDto.UniversityName;
+import com.unithon.team15_server.global.university.entity.AccreditedUniversity;
 import com.unithon.team15_server.global.university.enums.ProgramType;
 import com.unithon.team15_server.global.university.enums.UniversityType;
+import com.unithon.team15_server.global.university.repository.AccreditedUniversityRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -61,9 +62,9 @@ public class UniversityDataLoader implements CommandLineRunner {
         }
     }
 
-    private List<AccreditedUniversity> addAccreditedUniversity(List<String> universities, ProgramType programType, UniversityType universityType) {
+    private List<AccreditedUniversity> addAccreditedUniversity(List<UniversityName> universities, ProgramType programType, UniversityType universityType) {
         return universities.stream().map(
-                university -> AccreditedUniversity.create(university, programType, universityType)
+                university -> AccreditedUniversity.create(university.getUniversity(), university.getUniversityEng(), programType, universityType)
         ).toList();
     }
 }
