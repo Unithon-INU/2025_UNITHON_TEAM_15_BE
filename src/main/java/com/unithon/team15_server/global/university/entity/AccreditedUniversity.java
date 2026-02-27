@@ -17,7 +17,9 @@ public class AccreditedUniversity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    String name;
+    String university;
+
+    String universityEng;
 
     @Enumerated(EnumType.STRING)
     ProgramType programType;
@@ -26,15 +28,17 @@ public class AccreditedUniversity {
     UniversityType universityType;
 
     @Builder
-    private AccreditedUniversity(String name, ProgramType programType, UniversityType universityType) {
-        this.name = name;
+    private AccreditedUniversity(String university, String universityEng, ProgramType programType, UniversityType universityType) {
+        this.university = university;
+        this.universityEng = universityEng;
         this.programType = programType;
         this.universityType = universityType;
     }
 
-    public static AccreditedUniversity create(String name, ProgramType programType, UniversityType universityType) {
+    public static AccreditedUniversity create(String university, String universityEng, ProgramType programType, UniversityType universityType) {
         return AccreditedUniversity.builder()
-                .name(name)
+                .university(university)
+                .universityEng(universityEng)
                 .programType(programType)
                 .universityType(universityType)
                 .build();

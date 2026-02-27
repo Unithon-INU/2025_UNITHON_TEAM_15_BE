@@ -17,18 +17,24 @@ public class AccreditedUniversityDto {
     @NoArgsConstructor
     public static class DegreeProgram {
 
-        private List<String> bachelors;
-        private List<String> associate;
-        private List<String> graduate;
+        private List<UniversityName> bachelors;
+        private List<UniversityName> associate;
+        private List<UniversityName> graduate;
     }
 
     @Getter
     @NoArgsConstructor
     public static class LanguageProgram {
 
-        private List<String> bachelors;
-        private List<String> associate;
-        private List<String> graduate;
+        private List<UniversityName> bachelors;
+        private List<UniversityName> associate;
+        private List<UniversityName> graduate;
     }
 
+    @Getter
+    @NoArgsConstructor
+    public static class UniversityName {
+        private String university;
+        private String universityEng;
+    }
 }
