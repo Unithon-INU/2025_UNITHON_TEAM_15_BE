@@ -83,7 +83,12 @@ public class MemberService {
         switch (profileField) {
             case VISA_TYPE -> member.updateVisa(memberProfilePatchReq.getValue());
             case LANGUAGE_LEVEL -> member.updateLanguageLevel(memberProfilePatchReq.getValue());
-            case INDUSTRY -> member.updateIndustry(memberProfilePatchReq.getValue());
+            case INDUSTRY -> {
+                member.updateIndustry(memberProfilePatchReq.getValue());
+
+                boolean isFoodIndustry = member.getIndustry().contains("음식");
+                employmentCheckService.syncHealthCertificate(memberId, isFoodIndustry);
+            }
         }
     }
 

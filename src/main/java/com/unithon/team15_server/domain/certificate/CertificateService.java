@@ -12,7 +12,6 @@ import com.unithon.team15_server.domain.member.Member;
 import com.unithon.team15_server.domain.member.MemberRepository;
 import com.unithon.team15_server.global.exception.CustomException;
 import com.unithon.team15_server.global.exception.ErrorCode;
-import com.unithon.team15_server.global.university.repository.AccreditedUniversityRepository;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,7 +24,6 @@ public class CertificateService {
     private final PdfGenerator pdfGenerator;
     private final EmailSender emailSender;
     private final MemberRepository memberRepository;
-    private final AccreditedUniversityRepository accreditedUniversityRepository;
 
     public void sendCert(CertificateReq certificateReq) throws DocumentException, IOException, MessagingException {
         String pdf = pdfGenerator.parseHtmlToString(certificateReq);

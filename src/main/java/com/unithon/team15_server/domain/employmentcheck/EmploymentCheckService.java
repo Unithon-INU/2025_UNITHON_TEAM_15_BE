@@ -156,6 +156,29 @@ public class EmploymentCheckService {
         return new UpdateEmplCheckRes(calculateProgress(memberId));
     }
 
+    public void syncHealthCertificate(Long memberId, boolean isFoodIndustry) {
+        boolean exists = this.existsCheckStep(memberId, CheckStep.STEP2, 5); //보건증 체크리스트 유무
+        if (!exists && isFoodIndustry) {
+            this.addCheckStep(memberId, CheckStep.STEP2, 5);
+        } else if (exists && !isFoodIndustry) {
+            this.deleteCheckStep(memberId, CheckStep.STEP2, 5);
+        }
+    }
+
+    private boolean existsCheckStep(Long memberId, CheckStep checkStep, int submissionIdx) {
+        return employmentCheckRepository.existsByMemberIdAndCheckStepAndSubmissionIdx(memberId, checkStep, submissionIdx);
+    }
+
+    @Transactional
+    public void deleteCheckStep(Long memberId, CheckStep checkStep, int submissionIdx) {
+        employmentCheckRepository.deleteByMemberIdAndCheckStepAndSubmissionIdx(memberId, checkStep, submissionIdx);
+    }
+
+    @Transactional
+    public void addCheckStep(Long memberId, CheckStep checkStep, int submissionIdx) {
+        employmentCheckRepository.save(EmploymentCheck.create(memberId, checkStep, submissionIdx));
+    }
+
     private int calculateProgress(Long memberId) {
         int total = employmentCheckRepository.countByMemberId(memberId);
         int count = employmentCheckRepository.countByMemberIdAndIsCheckedTrue(memberId);
