@@ -8,6 +8,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "member_tb")
+@Slf4j
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -110,6 +112,10 @@ public class Member {
     }
 
     public void activateUser() {
+        if (this.activatedAt != null) {
+            log.error("[Member] 이미 활성화된 회원의 재온보딩 요청 발생. memberId={}", this.id);
+            return;
+        }
         this.memberRole = MemberRole.USER;
         this.activatedAt = LocalDateTime.now();
     }

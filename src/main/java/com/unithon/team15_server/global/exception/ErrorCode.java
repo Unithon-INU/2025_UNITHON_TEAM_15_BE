@@ -29,6 +29,7 @@ public enum ErrorCode {
     //409 Conflict
     USER_ALREADY_REGISTERED(HttpStatus.CONFLICT, "409-1", "이미 존재하는 회원입니다.."),
     NICKNAME_ALREADY_REGISTERED(HttpStatus.CONFLICT, "409-2", "이미 등록된 닉네임입니다."),
+    ALREADY_ACTIVATED_USER(HttpStatus.CONFLICT, "409-3", "이미 활성화된 회원입니다."),
 
     //500 Internal Server Error
     ACCREDITED_UNI_FILE_NOT_FOUND(HttpStatus.INTERNAL_SERVER_ERROR, "500-1", "인증대학 데이터 파일을 찾을 수 없습니다.");
