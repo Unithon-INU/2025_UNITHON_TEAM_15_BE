@@ -8,6 +8,9 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -41,6 +44,12 @@ public class Member {
 
     @Enumerated(EnumType.STRING)
     private CheckStep checkStep;
+
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
+
+    private LocalDateTime activatedAt;
 
     @Builder
     private Member(String nickname, String email, String password, String language, String languageLevel, String visaType, String industry, MemberRole memberRole, CheckStep checkStep) {
@@ -98,5 +107,10 @@ public class Member {
 
     public void updateCheckStep(CheckStep checkStep) {
         this.checkStep = checkStep;
+    }
+
+    public void activateUser() {
+        this.memberRole = MemberRole.USER;
+        this.activatedAt = LocalDateTime.now();
     }
 }

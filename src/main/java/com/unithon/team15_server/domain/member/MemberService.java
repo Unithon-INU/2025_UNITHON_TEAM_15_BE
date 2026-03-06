@@ -2,7 +2,6 @@ package com.unithon.team15_server.domain.member;
 
 import com.unithon.team15_server.domain.employmentcheck.EmploymentCheckService;
 import com.unithon.team15_server.domain.member.dto.*;
-import com.unithon.team15_server.domain.member.enums.MemberRole;
 import com.unithon.team15_server.domain.member.enums.ProfileField;
 import com.unithon.team15_server.global.exception.CustomException;
 import com.unithon.team15_server.global.exception.ErrorCode;
@@ -53,7 +52,7 @@ public class MemberService {
                 () -> new CustomException(ErrorCode.USER_NOT_FOUND)
         );
         member.updateProfile(memberProfileSetReq.getLanguage(), memberProfileSetReq.getLanguageLevel(), memberProfileSetReq.getVisaType(), memberProfileSetReq.getIndustry());
-        member.updateMemberRole(MemberRole.USER);
+        member.activateUser(); //Guest인 회원을 User로 활성화
         employmentCheckService.createEmploymentCheck(memberId); //회원가입 성공시 해당 회원에 대한 checklist 전체 생성
         return getToken(member.getEmail());
     }
