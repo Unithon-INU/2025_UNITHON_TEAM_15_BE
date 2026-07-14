@@ -19,7 +19,12 @@
 |:------:|:------:|:------:|:------:|
 | <a href="https://github.com/jiyunio"><img src="https://avatars.githubusercontent.com/u/146628970?v=4" width="100"></a> | <a href="https://github.com/Junhee8649"><img src="https://avatars.githubusercontent.com/u/67620918?v=4" width="100"></a> | <a href="https://github.com/ACH1002"><img src="https://avatars.githubusercontent.com/u/103422938?v=4" width="100"></a> | <img src="https://cdn.simpleicons.org/figma" width="100" alt="Figma"> |
 | BE, 기획 | FE | FE, 팀장 | Design, 기획 |
- 
+
+## Special Thanks
+프로젝트 진행 중 도움을 주신 분들입니다.
+- [박다인](https://github.com/da1nda2n) — 대학교 조회 API 정렬 지원 (BE)
+- 양서린 — 프로젝트 디자인 지원 (Design)
+
 <br/>
 <br/>
 
