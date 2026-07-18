@@ -120,7 +120,6 @@ team15_server/
 │   │       └── verification/             # 이메일 인증 (Email, EmailController, EmailService, dto)
 │   │
 │   └── resources/
-│       ├── application.yml / application-dev.yml / application-prod.yml
 │       ├── messages(_en/_ko).properties  # 다국어 메시지
 │       ├── static/                       # css, font
 │       └── templates/                    # certificate_en/ko.html, mail.html, policy/*
