@@ -1,5 +1,5 @@
 <a href="https://play.google.com/store/apps/details?id=inu.appcenter.bjj_android" target="_blank">
-<img width="1024" height="500" alt="checkmate 판넬" src="https://github.com/user-attachments/assets/4814ab3f-6b18-4e54-9ad2-436904e23974" />
+<img width="921" height="465" alt="Frame 1707484227" src="https://github.com/user-attachments/assets/fe2ea59f-8cd9-44cd-8b14-bff27635fdc4" />
 </a>
 
 <br/>
